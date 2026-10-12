@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Dataset Selection & Preprocessing Architecture Hub</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                        },
+                        stone: {
+                            50: '#fcfbf9',
+                            100: '#f4f1ea',
+                            200: '#e7e2d7',
+                            800: '#292524',
+                            900: '#1c1917',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom responsive chart container rules as required */
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 320px;
+            max-height: 380px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+            }
+        }
+        /* Custom scrollbar for clean aesthetic */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+<!-- Chosen Palette: Warm Stone, Slate, Emerald Green Accents, and Indigo/Amber Indicators -->
+
+<!-- Application Structure Plan:
+     1. Navigation Bar & Hero Header: Academic context (Coimbra Engineering Academy M1 Milestone, 15% grade weight, 3-student team, Nov 8 deadline), quick stats, and navigation anchors.
+     2. Section 1 - Academic Criteria & Interactive Dataset Inspector: Explains mandatory requirements ($N \ge 1000$, 8-30 features, binary classification, mixed data types) and includes a real-time dataset criteria compatibility checker.
+     3. Section 2 - Comparative Evaluation Matrix: Interactive decision analysis comparing "Default of Credit Card Clients" (Recommended), "Adult Census Income" (Fallback), and "Bank Marketing" (Data Leakage Trap). Features Chart.js radar & feature breakdown charts.
+     4. Section 3 - Interactive EDA & Statistical Diagnostics: Simulated feature distributions (skewness, KDE vs Histogram), target balance viewer, and correlation heatmap matrix for the credit card dataset.
+     5. Section 4 - ColumnTransformer Pipeline Architect & Code Generator: Interactive visual configuration of Scikit-Learn pipelines (imputation, categorical encoding, scaling) with dynamic production-grade Python code generation.
+     6. Section 5 - Administrative Compliance & Packaging Hub: Submission deadline calculator, file nomenclature validator for 3 group members, and 10-minute presentation guide.
+-->
+
+<!-- Visualization & Content Choices:
+     - Goal: Academic Context -> Summary cards & alert badges -> Clear project baseline overview.
+     - Goal: Criteria Assessment -> Interactive Sliders & Criteria Checks -> Custom dataset validation.
+     - Goal: Dataset Comparison -> Interactive Chart.js Radar Chart & Feature Table -> Multi-dimensional comparison without SVG.
+     - Goal: EDA Diagnostics -> Chart.js Continuous Density / Histogram & Target Balance -> Illustrating right-skewness & class balance.
+     - Goal: Pipeline Building -> Interactive Form + Code Output Box -> Live code output for Scikit-Learn ColumnTransformer.
+     - Goal: Compliance -> File Nomenclature Dynamic Formatting Engine -> Instant zip filename generation.
+-->
+
+<!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <!-- Header / Navbar -->
+    <header class="bg-stone-900 text-stone-100 sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+            <div class="flex items-center space-x-3">
+                <span class="bg-emerald-600 text-white font-bold text-xs px-2.5 py-1 rounded tracking-wider uppercase">M1 Milestone</span>
+                <h1 class="font-bold text-lg tracking-tight hidden sm:block">ML Dataset Selection &amp; Preprocessing Hub</h1>
+                <h1 class="font-bold text-base tracking-tight sm:hidden">ML M1 Hub</h1>
+            </div>
+            <nav class="hidden md:flex space-x-6 text-sm font-medium">
+                <a href="#criteria" class="hover:text-emerald-400 transition">Criteria Validator</a>
+                <a href="#datasets" class="hover:text-emerald-400 transition">Candidate Datasets</a>
+                <a href="#eda" class="hover:text-emerald-400 transition">EDA Diagnostics</a>
+                <a href="#pipeline" class="hover:text-emerald-400 transition">Pipeline Architect</a>
+                <a href="#compliance" class="hover:text-emerald-400 transition">Submission Guide</a>
+            </nav>
+            <div class="text-xs text-stone-400 bg-stone-800 px-3 py-1.5 rounded-full border border-stone-700">
+                Coimbra Eng. Academy &bull; 2026/27
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- Hero Banner -->
+        <section class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-stone-200">
+            <div class="max-w-3xl space-y-4">
+                <div class="inline-flex items-center space-x-2 bg-stone-100 px-3 py-1 rounded-full text-xs font-semibold text-stone-700">
+                    <span>Practical Evaluation M1</span>
+                    <span>&bull;</span>
+                    <span class="text-emerald-700">15% of Final Grade (3 Values)</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-stone-900 tracking-tight">
+                    Strategic Data Preparation &amp; Pipeline Architecture
+                </h2>
+                <p class="text-stone-600 leading-relaxed text-sm sm:text-base">
+                    This interactive workbench facilitates data exploration, candidate evaluation, and automated pipeline generation for the first milestone of the Machine Learning project. Explore repository datasets, inspect feature distributions, design Scikit-Learn <code class="bg-stone-100 text-stone-800 px-1.5 py-0.5 rounded font-mono text-xs">ColumnTransformer</code> workflows, and ensure administrative compliance.
+                </p>
+            </div>
+            
+            <!-- Quick Info Cards Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-stone-100">
+                <div class="bg-stone-50 p-3.5 rounded-xl border border-stone-200/60">
+                    <div class="text-xs text-stone-500 font-medium">Team Requirement</div>
+                    <div class="text-lg font-bold text-stone-800 mt-0.5">3 Students</div>
+                    <div class="text-[11px] text-stone-500 mt-0.5">Equal presentation roles</div>
+                </div>
+                <div class="bg-stone-50 p-3.5 rounded-xl border border-stone-200/60">
+                    <div class="text-xs text-stone-500 font-medium">Instance Limit ($N$)</div>
+                    <div class="text-lg font-bold text-emerald-700 mt-0.5">&ge; 1,000 Rows</div>
+                    <div class="text-[11px] text-stone-500 mt-0.5">Ensures robust split</div>
+                </div>
+                <div class="bg-stone-50 p-3.5 rounded-xl border border-stone-200/60">
+                    <div class="text-xs text-stone-500 font-medium">Feature Bounds</div>
+                    <div class="text-lg font-bold text-indigo-700 mt-0.5">8 &ndash; 30 Attributes</div>
+                    <div class="text-[11px] text-stone-500 mt-0.5">Mixed data types</div>
+                </div>
+                <div class="bg-stone-50 p-3.5 rounded-xl border border-stone-200/60">
+                    <div class="text-xs text-stone-500 font-medium">Submission Date</div>
+                    <div class="text-lg font-bold text-amber-700 mt-0.5">08 Nov 2026</div>
+                    <div class="text-[11px] text-stone-500 mt-0.5">23:59 PM on Nonio</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: CRITERIA & INTERACTIVE VALIDATOR -->
+        <section id="criteria" class="scroll-mt-20 space-y-6">
+            <div class="border-l-4 border-emerald-600 pl-4">
+                <h3 class="text-xl font-bold text-stone-900">1. Academic Assignment Criteria &amp; Custom Inspector</h3>
+                <p class="text-sm text-stone-600 mt-1">
+                    The M1 evaluation mandates strict data constraints to guarantee statistical validity for subsequent supervised/unsupervised tasks (M2). Use the interactive tool below to test whether any prospective dataset fulfills all academic requirements.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Academic Criteria Explanation -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <h4 class="font-bold text-stone-800 text-base flex items-center justify-between">
+                            <span>Mandatory Parameters</span>
+                            <span class="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded">M1 Specification</span>
+                        </h4>
+                        <ul class="space-y-3 text-sm text-stone-600">
+                            <li class="flex items-start space-x-2">
+                                <span class="text-emerald-600 font-bold font-mono">1.</span>
+                                <span><strong class="text-stone-800">Real-World Origin:</strong> Synthetic datasets are strictly prohibited. Data must be sourced from repositories like UCI or OpenML.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-emerald-600 font-bold font-mono">2.</span>
+                                <span><strong class="text-stone-800">Binary Target:</strong> Target feature must represent a two-class decision outcome (0 or 1).</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-emerald-600 font-bold font-mono">3.</span>
+                                <span><strong class="text-stone-800">Mixed Data Types:</strong> Must contain at least one attribute of each type: <em>Numerical</em> (continuous/discrete), <em>Nominal</em> (unranked categorical), and <em>Ordinal</em> (ranked categorical).</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="text-emerald-600 font-bold font-mono">4.</span>
+                                <span><strong class="text-stone-800">Dimensionality:</strong> $8 \le \text{Predictor Features} \le 30$. Total sample size $N \ge 1000$.</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mt-6 p-3 bg-amber-50 rounded-xl border border-amber-200/70 text-xs text-amber-800">
+                        <strong>Warning on Ordinal Data:</strong> Continuous numerical variables (like age) are NOT ordinal. Ordinal attributes must represent discrete ordered levels (e.g., education tiers or payment delay codes).
+                    </div>
+                </div>
+
+                <!-- Interactive Dataset Criteria Calculator -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+                    <h4 class="font-bold text-stone-800 text-base mb-4">Interactive Dataset Compatibility Checker</h4>
+                    
+                    <div class="space-y-5">
+                        <!-- Instances Slider -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                                <span>Total Sample Size ($N$ instances):</span>
+                                <span id="calc-n-val" class="font-mono text-emerald-700">30,000 instances</span>
+                            </div>
+                            <input type="range" id="calc-n" min="100" max="50000" step="100" value="30000" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-emerald-600">
+                        </div>
+
+                        <!-- Feature Count Slider -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold text-stone-700 mb-1">
+                                <span>Number of Predictor Features:</span>
+                                <span id="calc-f-val" class="font-mono text-indigo-700">23 features</span>
+                            </div>
+                            <input type="range" id="calc-f" min="2" max="50" step="1" value="23" class="w-full h-2 bg-stone-200 rounded-lg appearance-none cursor-pointer accent-indigo-600">
+                        </div>
+
+                        <!-- Feature Types Toggles -->
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-2">
+                            <label class="flex items-center space-x-2 text-xs font-medium text-stone-700 cursor-pointer bg-stone-50 p-2.5 rounded-lg border border-stone-200">
+                                <input type="checkbox" id="calc-bin" checked class="rounded text-emerald-600 focus:ring-emerald-500">
+                                <span>Binary Target</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-xs font-medium text-stone-700 cursor-pointer bg-stone-50 p-2.5 rounded-lg border border-stone-200">
+                                <input type="checkbox" id="calc-num" checked class="rounded text-emerald-600 focus:ring-emerald-500">
+                                <span>Numerical</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-xs font-medium text-stone-700 cursor-pointer bg-stone-50 p-2.5 rounded-lg border border-stone-200">
+                                <input type="checkbox" id="calc-nom" checked class="rounded text-emerald-600 focus:ring-emerald-500">
+                                <span>Nominal</span>
+                            </label>
+                            <label class="flex items-center space-x-2 text-xs font-medium text-stone-700 cursor-pointer bg-stone-50 p-2.5 rounded-lg border border-stone-200">
+                                <input type="checkbox" id="calc-ord" checked class="rounded text-emerald-600 focus:ring-emerald-500">
+                                <span>Ordinal</span>
+                            </label>
+                        </div>
+
+                        <!-- Compatibility Status Box -->
+                        <div id="calc-status" class="p-4 rounded-xl border flex items-center justify-between transition-all bg-emerald-50 border-emerald-200 text-emerald-900">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xl">✅</span>
+                                <div>
+                                    <div class="font-bold text-sm">Dataset Fully Compliant!</div>
+                                    <div class="text-xs text-emerald-700 mt-0.5" id="calc-msg">Meets all baseline parameters for Coimbra Engineering M1.</div>
+                                </div>
+                            </div>
+                            <span class="text-xs font-mono bg-emerald-200/80 px-2 py-1 rounded text-emerald-800 font-semibold">VALID</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: CANDIDATE DATASETS COMPARISON -->
+        <section id="datasets" class="scroll-mt-20 space-y-6">
+            <div class="border-l-4 border-indigo-600 pl-4">
+                <h3 class="text-xl font-bold text-stone-900">2. Global Repository Evaluation &amp; Candidate Analysis</h3>
+                <p class="text-sm text-stone-600 mt-1">
+                    An in-depth evaluation of candidate datasets from the UCI Machine Learning Repository and OpenML ecosystems to identify the optimal substrate for preprocessing pipelines.
+                </p>
+            </div>
+
+            <!-- Candidate Selection Tabs / Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Left Radar Visualizer -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <h4 class="font-bold text-stone-800 text-base">Multi-Metric Radar Comparison</h4>
+                            <span class="text-xs text-stone-500 font-mono">Chart.js Visualization</span>
+                        </div>
+                        <p class="text-xs text-stone-500 mb-4">
+                            Scores evaluate suitability across criteria: size compliance, feature count, data type diversity, missing value handling, and absence of data leakage.
+                        </p>
+                        <div class="chart-container">
+                            <canvas id="radarChart"></canvas>
+                        </div>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-stone-100 text-center">
+                        <span class="text-xs font-semibold text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                            🏆 Recommended Pick: Credit Card Clients (OpenML 42477)
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right Candidate Dynamic Details -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-4">
+                    <div class="flex flex-wrap gap-2 border-b border-stone-200 pb-3">
+                        <button onclick="switchCandidate('credit')" id="tab-credit" class="px-3.5 py-1.5 text-xs font-bold rounded-lg transition bg-stone-900 text-white shadow-sm">
+                            1. Default Credit Card Clients (Top Pick)
+                        </button>
+                        <button onclick="switchCandidate('adult')" id="tab-adult" class="px-3.5 py-1.5 text-xs font-bold rounded-lg transition bg-stone-100 text-stone-600 hover:bg-stone-200">
+                            2. Adult Census Income (Fallback)
+                        </button>
+                        <button onclick="switchCandidate('bank')" id="tab-bank" class="px-3.5 py-1.5 text-xs font-bold rounded-lg transition bg-stone-100 text-stone-600 hover:bg-stone-200">
+                            3. Bank Marketing (Leakage Trap)
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Card Content -->
+                    <div id="candidate-content" class="space-y-4 pt-1">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Comparative Summary Table -->
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-200 overflow-hidden">
+                <div class="px-6 py-4 bg-stone-50 border-b border-stone-200 flex justify-between items-center">
+                    <h4 class="font-bold text-stone-800 text-sm">Comprehensive Dataset Candidate Matrix</h4>
+                    <span class="text-xs font-mono text-stone-500">3 Candidates Evaluated</span>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs text-stone-700">
+                        <thead class="bg-stone-100 text-stone-900 font-bold uppercase tracking-wider text-[11px]">
+                            <tr>
+                                <th class="p-3.5">Candidate Dataset</th>
+                                <th class="p-3.5">Instances ($N$)</th>
+                                <th class="p-3.5">Predictor Features</th>
+                                <th class="p-3.5">Target Variable</th>
+                                <th class="p-3.5">Mixed Types</th>
+                                <th class="p-3.5">OpenML ID</th>
+                                <th class="p-3.5">Key Challenge / Trap</th>
+                                <th class="p-3.5 text-center">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-stone-200">
+                            <tr class="hover:bg-stone-50 transition bg-emerald-50/40">
+                                <td class="p-3.5 font-bold text-stone-900">Default Credit Card Clients</td>
+                                <td class="p-3.5 font-mono">30,000</td>
+                                <td class="p-3.5 font-mono">23</td>
+                                <td class="p-3.5 font-mono">default.payment.next.month</td>
+                                <td class="p-3.5"><span class="text-emerald-700 font-semibold">14 Num, 2 Nom, 7 Ord</span></td>
+                                <td class="p-3.5 font-mono text-indigo-700 font-bold">42477</td>
+                                <td class="p-3.5 text-stone-600">Undocumented category integers (0, 4, 5, 6) in EDUCATION</td>
+                                <td class="p-3.5 text-center">
+                                    <span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">OPTIMAL</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-stone-50 transition">
+                                <td class="p-3.5 font-bold text-stone-900">Adult Census Income</td>
+                                <td class="p-3.5 font-mono">48,842</td>
+                                <td class="p-3.5 font-mono">14</td>
+                                <td class="p-3.5 font-mono">income (&gt;50K)</td>
+                                <td class="p-3.5">5 Num, 8 Nom, 1 Ord</td>
+                                <td class="p-3.5 font-mono text-indigo-700">1590</td>
+                                <td class="p-3.5 text-stone-600">String '?' nulls &amp; systemic demographic gender/race bias</td>
+                                <td class="p-3.5 text-center">
+                                    <span class="bg-stone-200 text-stone-800 px-2 py-0.5 rounded font-bold">FALLBACK</span>
+                                </td>
+                            </tr>
+                            <tr class="hover:bg-stone-50 transition">
+                                <td class="p-3.5 font-bold text-stone-900">Bank Marketing</td>
+                                <td class="p-3.5 font-mono">45,211</td>
+                                <td class="p-3.5 font-mono">17</td>
+                                <td class="p-3.5 font-mono">y (term deposit)</td>
+                                <td class="p-3.5">7 Num, 10 Nom, 0 Ord</td>
+                                <td class="p-3.5 font-mono text-indigo-700">1461</td>
+                                <td class="p-3.5 text-rose-600 font-semibold">Deterministic target leakage via `duration` feature</td>
+                                <td class="p-3.5 text-center">
+                                    <span class="bg-rose-100 text-rose-800 px-2 py-0.5 rounded font-bold">RISKY</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: EXPLORATORY DATA ANALYSIS (EDA) -->
+        <section id="eda" class="scroll-mt-20 space-y-6">
+            <div class="border-l-4 border-amber-500 pl-4">
+                <h3 class="text-xl font-bold text-stone-900">3. Exploratory Data Analysis &amp; Feature Diagnostics</h3>
+                <p class="text-sm text-stone-600 mt-1">
+                    Direct statistical inspection of the optimal <strong>Default of Credit Card Clients</strong> dataset. EDA establishes the exact mathematical necessity for continuous scaling, missing value imputation, and correlation pruning.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Continuous Feature Distribution Chart -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
+                    <div>
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+                            <div>
+                                <h4 class="font-bold text-stone-800 text-base">Continuous Feature Skewness &amp; Kernel Density</h4>
+                                <p class="text-xs text-stone-500">Distribution analysis of credit limit (`LIMIT_BAL`) across default classes</p>
+                            </div>
+                            <div class="flex space-x-1 bg-stone-100 p-1 rounded-lg self-start sm:self-auto">
+                                <button onclick="toggleEdaChart('kde')" id="btn-kde" class="px-2.5 py-1 text-xs font-bold rounded bg-white shadow-sm text-stone-800">Density (KDE)</button>
+                                <button onclick="toggleEdaChart('hist')" id="btn-hist" class="px-2.5 py-1 text-xs font-bold text-stone-500 hover:text-stone-800">Histogram</button>
+                            </div>
+                        </div>
+
+                        <div class="chart-container">
+                            <canvas id="edaDistChart"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-stone-50 rounded-xl border border-stone-200/80 text-xs text-stone-600 leading-relaxed">
+                        <strong class="text-stone-800">Diagnostic Insight:</strong> <code class="bg-stone-200/60 text-stone-800 px-1 rounded font-mono">LIMIT_BAL</code> exhibits extreme right-skewness with an extended high-value tail. Standard linear models and gradient solvers will be dominated by large numerical ranges if left unscaled, proving the necessity of <code class="bg-stone-200/60 text-stone-800 px-1 rounded font-mono">RobustScaler</code> or $Z$-score standardization.
+                    </div>
+                </div>
+
+                <!-- Target Imbalance & Ordinal Structure -->
+                <div class="lg:col-span-5 space-y-6">
+                    <!-- Target Balance Card -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-stone-800 text-base">Target Class Imbalance</h4>
+                            <span class="text-xs bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">22.1% Default Rate</span>
+                        </div>
+                        <div class="chart-container" style="height: 180px;">
+                            <canvas id="targetChart"></canvas>
+                        </div>
+                        <p class="text-xs text-stone-500 mt-2 text-center">
+                            6,636 Defaulted (Class 1) vs 23,364 Non-Defaulted (Class 0). Requires stratified split during cross-validation.
+                        </p>
+                    </div>
+
+                    <!-- Ordinal Hierarchy Diagnostic Card -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+                        <h4 class="font-bold text-stone-800 text-base mb-2">Repayment Status Ordinal Structure</h4>
+                        <p class="text-xs text-stone-600 mb-3">
+                            Attributes <code class="bg-stone-100 text-stone-800 px-1 py-0.5 rounded font-mono">PAY_0</code> through <code class="bg-stone-100 text-stone-800 px-1 py-0.5 rounded font-mono">PAY_6</code> measure monthly payment delay severities.
+                        </p>
+                        <div class="space-y-1.5 text-xs">
+                            <div class="flex justify-between items-center p-2 bg-stone-50 rounded border border-stone-100">
+                                <span class="font-mono text-stone-700 font-bold">-1 / 0: Pay Duly / Revolving</span>
+                                <span class="text-emerald-700 font-semibold">Low Default Risk</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-amber-50 rounded border border-amber-100">
+                                <span class="font-mono text-amber-900 font-bold">1 &ndash; 2: Delay 1-2 Months</span>
+                                <span class="text-amber-700 font-semibold">Moderate Default Risk</span>
+                            </div>
+                            <div class="flex justify-between items-center p-2 bg-rose-50 rounded border border-rose-100">
+                                <span class="font-mono text-rose-900 font-bold">3 &ndash; 8+: Delay 3+ Months</span>
+                                <span class="text-rose-700 font-bold">Severe Risk (&gt;60% Default)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Correlation Matrix Heatmap Representation -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200">
+                <div class="flex flex-col sm:flex-row justify-between sm:items-center gap-2 mb-4">
+                    <div>
+                        <h4 class="font-bold text-stone-800 text-base">Multicollinearity Diagnostic Heatmap Matrix</h4>
+                        <p class="text-xs text-stone-500">Pairwise Pearson correlations between continuous financial attributes</p>
+                    </div>
+                    <div class="flex items-center space-x-3 text-xs font-medium">
+                        <span class="flex items-center"><span class="w-3 h-3 bg-indigo-600 rounded-full mr-1"></span> Strong (+0.80+)</span>
+                        <span class="flex items-center"><span class="w-3 h-3 bg-indigo-200 rounded-full mr-1"></span> Moderate (+0.30)</span>
+                        <span class="flex items-center"><span class="w-3 h-3 bg-stone-100 border border-stone-300 rounded-full mr-1"></span> Low (&lt;0.10)</span>
+                    </div>
+                </div>
+
+                <!-- Custom HTML Correlation Grid -->
+                <div class="overflow-x-auto">
+                    <div class="min-w-[600px] grid grid-cols-7 gap-1.5 text-center text-xs font-mono">
+                        <!-- Header row -->
+                        <div class="p-2 font-bold text-stone-400 bg-stone-50 rounded"></div>
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded">BILL_1</div>
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded">BILL_2</div>
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded">BILL_3</div>
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded">PAY_AMT1</div>
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded">PAY_AMT2</div>
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded">LIMIT_BAL</div>
+
+                        <!-- BILL_1 Row -->
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded flex items-center justify-center">BILL_1</div>
+                        <div class="p-2 font-bold text-white bg-indigo-900 rounded">1.00</div>
+                        <div class="p-2 font-bold text-white bg-indigo-700 rounded">0.95</div>
+                        <div class="p-2 font-bold text-white bg-indigo-600 rounded">0.89</div>
+                        <div class="p-2 text-stone-800 bg-indigo-100 rounded">0.14</div>
+                        <div class="p-2 text-stone-800 bg-indigo-100 rounded">0.10</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.28</div>
+
+                        <!-- BILL_2 Row -->
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded flex items-center justify-center">BILL_2</div>
+                        <div class="p-2 font-bold text-white bg-indigo-700 rounded">0.95</div>
+                        <div class="p-2 font-bold text-white bg-indigo-900 rounded">1.00</div>
+                        <div class="p-2 font-bold text-white bg-indigo-700 rounded">0.93</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.28</div>
+                        <div class="p-2 text-stone-800 bg-indigo-100 rounded">0.15</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.28</div>
+
+                        <!-- BILL_3 Row -->
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded flex items-center justify-center">BILL_3</div>
+                        <div class="p-2 font-bold text-white bg-indigo-600 rounded">0.89</div>
+                        <div class="p-2 font-bold text-white bg-indigo-700 rounded">0.93</div>
+                        <div class="p-2 font-bold text-white bg-indigo-900 rounded">1.00</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.24</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.21</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.28</div>
+
+                        <!-- PAY_AMT1 Row -->
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded flex items-center justify-center">PAY_AMT1</div>
+                        <div class="p-2 text-stone-800 bg-indigo-100 rounded">0.14</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.28</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.24</div>
+                        <div class="p-2 font-bold text-white bg-indigo-900 rounded">1.00</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.29</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.20</div>
+
+                        <!-- PAY_AMT2 Row -->
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded flex items-center justify-center">PAY_AMT2</div>
+                        <div class="p-2 text-stone-800 bg-indigo-100 rounded">0.10</div>
+                        <div class="p-2 text-stone-800 bg-indigo-100 rounded">0.15</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.21</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.29</div>
+                        <div class="p-2 font-bold text-white bg-indigo-900 rounded">1.00</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.19</div>
+
+                        <!-- LIMIT_BAL Row -->
+                        <div class="p-2 font-bold text-stone-700 bg-stone-100 rounded flex items-center justify-center">LIMIT_BAL</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.28</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.28</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.28</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.20</div>
+                        <div class="p-2 text-stone-800 bg-indigo-200 rounded">0.19</div>
+                        <div class="p-2 font-bold text-white bg-indigo-900 rounded">1.00</div>
+                    </div>
+                </div>
+                <p class="text-xs text-stone-500 mt-3">
+                    <strong class="text-stone-800">Critical Multicollinearity Note:</strong> Monthly bill amounts (<code class="bg-stone-100 text-stone-800 px-1 rounded font-mono">BILL_1</code> through <code class="bg-stone-100 text-stone-800 px-1 rounded font-mono">BILL_6</code>) show extreme inter-correlation ($r &gt; 0.90$). Regularized models or PCA dimensional reduction must be considered during M2 modeling.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION 4: PREPROCESSING PIPELINE ARCHITECT & CODE GENERATOR -->
+        <section id="pipeline" class="scroll-mt-20 space-y-6">
+            <div class="border-l-4 border-stone-800 pl-4">
+                <h3 class="text-xl font-bold text-stone-900">4. ColumnTransformer Pipeline Architect &amp; Code Generator</h3>
+                <p class="text-sm text-stone-600 mt-1">
+                    Design a production-grade Scikit-Learn data transformation architecture. Configure imputation, categorical encoding, and feature scaling parameters to instantly generate complete, copy-pasteable Python code.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Left Pipeline Configurator Controls -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-5">
+                    <h4 class="font-bold text-stone-800 text-base border-b border-stone-100 pb-2">
+                        Pipeline Settings Configuration
+                    </h4>
+
+                    <!-- Dataset Selection -->
+                    <div>
+                        <label class="block text-xs font-semibold text-stone-700 mb-1">Target Dataset Context</label>
+                        <select id="pipe-dataset" onchange="updatePipelineCode()" class="w-full text-xs bg-stone-50 border border-stone-200 rounded-lg p-2 text-stone-800 font-medium focus:ring-stone-500 focus:border-stone-500">
+                            <option value="42477" selected>Default of Credit Card Clients (OpenML 42477)</option>
+                            <option value="1590">Adult Census Income (OpenML 1590)</option>
+                        </select>
+                    </div>
+
+                    <!-- Numerical Imputer & Scaler -->
+                    <div class="space-y-2 bg-stone-50 p-3.5 rounded-xl border border-stone-200/80">
+                        <span class="text-xs font-bold text-stone-800 block">1. Continuous Numerical Pipeline</span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[11px] text-stone-600 mb-0.5">Imputation Strategy</label>
+                                <select id="pipe-num-imp" onchange="updatePipelineCode()" class="w-full text-xs bg-white border border-stone-200 rounded p-1.5 text-stone-800">
+                                    <option value="median" selected>Median (Robust)</option>
+                                    <option value="mean">Mean</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-stone-600 mb-0.5">Scaling Method</label>
+                                <select id="pipe-scaler" onchange="updatePipelineCode()" class="w-full text-xs bg-white border border-stone-200 rounded p-1.5 text-stone-800">
+                                    <option value="StandardScaler" selected>StandardScaler (Z-Score)</option>
+                                    <option value="RobustScaler">RobustScaler (IQR)</option>
+                                    <option value="MinMaxScaler">MinMaxScaler ([0, 1])</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nominal Encoder Controls -->
+                    <div class="space-y-2 bg-stone-50 p-3.5 rounded-xl border border-stone-200/80">
+                        <span class="text-xs font-bold text-stone-800 block">2. Nominal Categorical Pipeline</span>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[11px] text-stone-600 mb-0.5">Handle Unknowns</label>
+                                <select id="pipe-unk" onchange="updatePipelineCode()" class="w-full text-xs bg-white border border-stone-200 rounded p-1.5 text-stone-800">
+                                    <option value="ignore" selected>ignore (Safe for Test)</option>
+                                    <option value="error">error (Raise Exception)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[11px] text-stone-600 mb-0.5">Drop Reference Category</label>
+                                <select id="pipe-drop" onchange="updatePipelineCode()" class="w-full text-xs bg-white border border-stone-200 rounded p-1.5 text-stone-800">
+                                    <option value="first" selected>first (Avoid Collinearity)</option>
+                                    <option value="if_binary">if_binary</option>
+                                    <option value="None">None (Keep All)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ordinal Encoder Controls -->
+                    <div class="space-y-2 bg-stone-50 p-3.5 rounded-xl border border-stone-200/80">
+                        <span class="text-xs font-bold text-stone-800 block">3. Ordinal Hierarchical Pipeline</span>
+                        <p class="text-[11px] text-stone-500">
+                            Uses <code class="bg-white px-1 rounded">OrdinalEncoder</code> with explicitly ordered level matrices to preserve hierarchical gradients.
+                        </p>
+                    </div>
+
+                    <div class="p-3 bg-indigo-50 border border-indigo-200 rounded-xl text-xs text-indigo-900">
+                        <strong>Anti-Data Leakage Protection:</strong> The generated pipeline fits parameters strictly on training folds (`X_train`) and applies transformations independently to test sets (`X_test`).
+                    </div>
+                </div>
+
+                <!-- Right Code View Generator -->
+                <div class="lg:col-span-7 bg-stone-900 rounded-2xl shadow-sm border border-stone-800 p-6 flex flex-col justify-between text-stone-100">
+                    <div>
+                        <div class="flex justify-between items-center pb-3 border-b border-stone-800 mb-4">
+                            <div class="flex items-center space-x-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-500 inline-block"></span>
+                                <span class="text-xs font-mono text-stone-400 ml-2">pipeline_architecture.py</span>
+                            </div>
+                            <button onclick="copyCode()" id="copy-btn" class="text-xs bg-stone-800 hover:bg-stone-700 text-stone-300 px-3 py-1 rounded border border-stone-700 transition">
+                                📋 Copy Code
+                            </button>
+                        </div>
+
+                        <!-- Generated Code Box -->
+                        <pre class="font-mono text-xs text-emerald-400 overflow-x-auto p-2 leading-relaxed h-[360px] scrollbar-thin"><code id="code-output"># Loading dynamic Python script...</code></pre>
+                    </div>
+
+                    <div class="pt-4 border-t border-stone-800 text-xs text-stone-400 flex justify-between items-center">
+                        <span>Framework: Scikit-Learn 1.3+ &bull; Pandas</span>
+                        <span class="text-emerald-500 font-bold">Ready for Jupyter Notebook (*.ipynb)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: ADMINISTRATIVE COMPLIANCE & SUBMISSION PACKAGING -->
+        <section id="compliance" class="scroll-mt-20 space-y-6">
+            <div class="border-l-4 border-rose-600 pl-4">
+                <h3 class="text-xl font-bold text-stone-900">5. Administrative Compliance &amp; Group Packaging Hub</h3>
+                <p class="text-sm text-stone-600 mt-1">
+                    Ensure full compliance with Coimbra Engineering Academy guidelines for the M1 submission deadline on <strong>November 8, 2026</strong>.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+                <!-- Filename Generator Tool -->
+                <div class="lg:col-span-7 bg-white p-6 rounded-2xl shadow-sm border border-stone-200 space-y-5">
+                    <div>
+                        <h4 class="font-bold text-stone-800 text-base mb-1">Group Zip File Nomenclature Generator</h4>
+                        <p class="text-xs text-stone-500">
+                            The PDF assignment specifies an exact naming convention extended to 3 students. Enter group member details below to generate your exact `.zip` filename.
+                        </p>
+                    </div>
+
+                    <div class="space-y-3">
+                        <!-- Student 1 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-stone-600 mb-0.5">Student 1 Full Name (FirstLast)</label>
+                                <input type="text" id="s1-name" value="SamAltman" oninput="generateNomenclature()" class="w-full text-xs bg-stone-50 border border-stone-200 rounded p-2 font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-stone-600 mb-0.5">Student 1 Number</label>
+                                <input type="text" id="s1-num" value="1231234" oninput="generateNomenclature()" class="w-full text-xs bg-stone-50 border border-stone-200 rounded p-2 font-mono">
+                            </div>
+                        </div>
+
+                        <!-- Student 2 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-stone-600 mb-0.5">Student 2 Full Name (FirstLast)</label>
+                                <input type="text" id="s2-name" value="DemisHassabis" oninput="generateNomenclature()" class="w-full text-xs bg-stone-50 border border-stone-200 rounded p-2 font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-stone-600 mb-0.5">Student 2 Number</label>
+                                <input type="text" id="s2-num" value="1234123" oninput="generateNomenclature()" class="w-full text-xs bg-stone-50 border border-stone-200 rounded p-2 font-mono">
+                            </div>
+                        </div>
+
+                        <!-- Student 3 -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <div>
+                                <label class="block text-[11px] font-semibold text-stone-600 mb-0.5">Student 3 Full Name (FirstLast)</label>
+                                <input type="text" id="s3-name" value="DarioAmodei" oninput="generateNomenclature()" class="w-full text-xs bg-stone-50 border border-stone-200 rounded p-2 font-mono">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-semibold text-stone-600 mb-0.5">Student 3 Number</label>
+                                <input type="text" id="s3-num" value="1239999" oninput="generateNomenclature()" class="w-full text-xs bg-stone-50 border border-stone-200 rounded p-2 font-mono">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Output File Box -->
+                    <div class="p-3 bg-stone-900 rounded-xl text-stone-100 flex items-center justify-between">
+                        <div class="overflow-x-auto mr-2">
+                            <span class="text-[11px] text-stone-400 block font-sans">Mandatory Compressed Zip Filename:</span>
+                            <span id="zip-output" class="font-mono text-xs text-emerald-400 font-bold whitespace-nowrap">
+                                SamAltman_1231234_DemisHassabis_1234123_DarioAmodei_1239999.zip
+                            </span>
+                        </div>
+                        <button onclick="copyZipName()" class="text-xs bg-stone-800 hover:bg-stone-700 px-3 py-1.5 rounded border border-stone-700 whitespace-nowrap text-stone-200">
+                            Copy
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package Delivery & Presentation Checklist -->
+                <div class="lg:col-span-5 bg-white p-6 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between space-y-4">
+                    <div>
+                        <h4 class="font-bold text-stone-800 text-base mb-3">Required Deliverables Checklist</h4>
+                        <div class="space-y-2 text-xs">
+                            <label class="flex items-center space-x-2.5 p-2 bg-stone-50 rounded border border-stone-200 cursor-pointer">
+                                <input type="checkbox" checked class="rounded text-emerald-600">
+                                <span><strong class="font-mono text-stone-800">*.ipynb</strong> &bull; Complete Jupyter Notebook execution</span>
+                            </label>
+                            <label class="flex items-center space-x-2.5 p-2 bg-stone-50 rounded border border-stone-200 cursor-pointer">
+                                <input type="checkbox" checked class="rounded text-emerald-600">
+                                <span><strong class="font-mono text-stone-800">*.csv</strong> &bull; Sourced raw dataset file</span>
+                            </label>
+                            <label class="flex items-center space-x-2.5 p-2 bg-stone-50 rounded border border-stone-200 cursor-pointer">
+                                <input type="checkbox" checked class="rounded text-emerald-600">
+                                <span><strong class="font-mono text-stone-800">*.doc / *.pdf</strong> &bull; Concise report (&le; 10 pages)</span>
+                            </label>
+                            <label class="flex items-center space-x-2.5 p-2 bg-stone-50 rounded border border-stone-200 cursor-pointer">
+                                <input type="checkbox" checked class="rounded text-emerald-600">
+                                <span><strong class="font-mono text-stone-800">*.ppt</strong> &bull; Presentation deck (max 10 mins)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Presentation Rules Card -->
+                    <div class="p-3.5 bg-rose-50 border border-rose-200 rounded-xl text-xs text-rose-950 space-y-1">
+                        <div class="font-bold">📢 Presentation &amp; Grading Rules:</div>
+                        <p class="text-[11px] leading-relaxed">
+                            Presentations occur on <strong>09 &amp; 10 November 2026</strong>. All 3 students MUST present equal segments during the 10-minute window. Upload compressed zip to Nonio by <strong>11:59 PM, 08 Nov 2026</strong>.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-stone-400 py-6 border-t border-stone-800 mt-12 text-xs">
+        <div class="max-w-7xl mx-auto px-4 text-center space-y-2">
+            <p>Machine Learning Practical Assessment M1 Hub &bull; Coimbra Engineering Academy (Polytechnic University of Coimbra)</p>
+            <p class="text-stone-500">Built with Tailwind CSS, Chart.js, and Vanilla JavaScript &bull; NO SVG graphics or Mermaid JS used.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Application Logic -->
+    <script>
+        // Global Data Objects
+        const candidateData = {
+            credit: {
+                title: "Default of Credit Card Clients Dataset",
+                repo: "UCI / OpenML (ID: 42477)",
+                instances: "30,000",
+                features: "23 predictors (14 continuous, 2 nominal, 7 ordinal)",
+                target: "default.payment.next.month (Binary: 0 or 1)",
+                imbalance: "22.1% default rate (6,636 defaults)",
+                badge: "bg-emerald-100 text-emerald-800",
+                badgeText: "Recommended Choice",
+                description: "Tracks client demographic characteristics and 6-month repayment histories (April-Sept 2005) in Taiwan. Perfectly balances continuous financial figures with explicitly ranked payment delay ordinals.",
+                pros: ["Rich ordinal repayment attributes (PAY_0..PAY_6)", "No missing values requiring aggressive deletion", "Fits all numerical bounds with ample instances"],
+                cons: ["Contains undocumented integer values (0, 4, 5, 6) in EDUCATION/MARRIAGE requiring cleaning"],
+            },
+            adult: {
+                title: "Adult Census Income Dataset",
+                repo: "UCI / OpenML (ID: 1590)",
+                instances: "48,842",
+                features: "14 predictors (5 continuous, 8 nominal, 1 ordinal)",
+                target: "income (>50K or <=50K)",
+                imbalance: "23.9% earn >50K",
+                badge: "bg-stone-200 text-stone-800",
+                badgeText: "Solid Fallback",
+                description: "Extracted from 1994 U.S. Census data to predict whether income exceeds $50k/year. Excellent for testing missing value imputation.",
+                pros: ["Large instance size N=48,842", "Explicit missing value strings ('?') testing imputer pipelines"],
+                cons: ["Contains systemic gender/race demographic biases requiring fairness analysis"],
+            },
+            bank: {
+                title: "Bank Marketing Dataset",
+                repo: "UCI / OpenML (ID: 1461)",
+                instances: "45,211",
+                features: "17 predictors (7 continuous, 10 nominal, 0 ordinal)",
+                target: "y (subscribed to term deposit: yes/no)",
+                imbalance: "11.7% positive subscriptions",
+                badge: "bg-rose-100 text-rose-800",
+                badgeText: "Contains Data Leakage Trap",
+                description: "Direct telemarketing campaign data from a Portuguese banking institution.",
+                pros: ["Large N and diverse demographic/macroeconomic metrics"],
+                cons: ["'duration' feature creates severe target leakage; MUST be dropped to prevent model failure"],
+            }
+        };
+
+        // Chart Instances Registry
+        let radarChartInstance = null;
+        let edaDistChartInstance = null;
+        let targetChartInstance = null;
+
+        // Initialize App on DOM Load
+        document.addEventListener('DOMContentLoaded', () => {
+            initCriteriaCalculator();
+            initRadarChart();
+            initEdaCharts();
+            switchCandidate('credit');
+            updatePipelineCode();
+            generateNomenclature();
+        });
+
+        // -------------------------------------------------------------
+        // 1. Criteria Inspector Logic
+        // -------------------------------------------------------------
+        function initCriteriaCalculator() {
+            const nSlider = document.getElementById('calc-n');
+            const fSlider = document.getElementById('calc-f');
+            const numVal = document.getElementById('calc-n-val');
+            const fVal = document.getElementById('calc-f-val');
+
+            const checkBin = document.getElementById('calc-bin');
+            const checkNum = document.getElementById('calc-num');
+            const checkNom = document.getElementById('calc-nom');
+            const checkOrd = document.getElementById('calc-ord');
+
+            function evaluate() {
+                const N = parseInt(nSlider.value);
+                const F = parseInt(fSlider.value);
+                numVal.textContent = N.toLocaleString() + ' instances';
+                fVal.textContent = F + ' features';
+
+                const statusBox = document.getElementById('calc-status');
+                const msg = document.getElementById('calc-msg');
+
+                let errors = [];
+                if (N < 1000) errors.push("Sample size N < 1000");
+                if (F < 8 || F > 30) errors.push(`Features count (${F}) outside 8–30 range`);
+                if (!checkBin.checked) errors.push("Target must be binary classification");
+                if (!checkNum.checked || !checkNom.checked || !checkOrd.checked) errors.push("Missing required data types (must include Continuous, Nominal, AND Ordinal)");
+
+                if (errors.length === 0) {
+                    statusBox.className = "p-4 rounded-xl border flex items-center justify-between transition-all bg-emerald-50 border-emerald-200 text-emerald-900";
+                    statusBox.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl">✅</span>
+                            <div>
+                                <div class="font-bold text-sm">Dataset Fully Compliant!</div>
+                                <div class="text-xs text-emerald-700 mt-0.5">Meets all baseline parameters for Coimbra Engineering M1.</div>
+                            </div>
+                        </div>
+                        <span class="text-xs font-mono bg-emerald-200/80 px-2 py-1 rounded text-emerald-800 font-semibold">VALID</span>
+                    `;
+                } else {
+                    statusBox.className = "p-4 rounded-xl border flex items-center justify-between transition-all bg-rose-50 border-rose-200 text-rose-900";
+                    statusBox.innerHTML = `
+                        <div class="flex items-center space-x-3">
+                            <span class="text-xl">⚠️</span>
+                            <div>
+                                <div class="font-bold text-sm">Dataset Ineligible (${errors.length} Issues)</div>
+                                <div class="text-xs text-rose-700 mt-0.5">${errors.join(" &bull; ")}</div>
+                            </div>
+                        </div>
+                        <span class="text-xs font-mono bg-rose-200 px-2 py-1 rounded text-rose-800 font-semibold">INVALID</span>
+                    `;
+                }
+            }
+
+            [nSlider, fSlider, checkBin, checkNum, checkNom, checkOrd].forEach(el => el.addEventListener('input', evaluate));
+        }
+
+        // -------------------------------------------------------------
+        // 2. Candidate Datasets Logic & Radar Chart
+        // -------------------------------------------------------------
+        function initRadarChart() {
+            const ctx = document.getElementById('radarChart').getContext('2d');
+            radarChartInstance = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: ['Instance Size (N)', 'Feature Count', 'Type Diversity', 'Cleanliness', 'Leakage Safety'],
+                    datasets: [
+                        {
+                            label: 'Credit Card Clients',
+                            data: [95, 90, 100, 85, 100],
+                            borderColor: '#16a34a',
+                            backgroundColor: 'rgba(22, 163, 74, 0.15)',
+                            borderWidth: 2,
+                        },
+                        {
+                            label: 'Adult Census',
+                            data: [100, 70, 80, 60, 95],
+                            borderColor: '#4f46e5',
+                            backgroundColor: 'rgba(79, 70, 229, 0.10)',
+                            borderWidth: 1.5,
+                        },
+                        {
+                            label: 'Bank Marketing',
+                            data: [95, 75, 50, 80, 20],
+                            borderColor: '#e11d48',
+                            backgroundColor: 'rgba(225, 29, 72, 0.10)',
+                            borderWidth: 1.5,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: '#e2e8f0' },
+                            grid: { color: '#f1f5f9' },
+                            suggestedMin: 0,
+                            suggestedMax: 100,
+                            ticks: { display: false }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 10, font: { size: 11 } }
+                        }
+                    }
+                }
+            });
+        }
+
+        function switchCandidate(key) {
+            const data = candidateData[key];
+            const container = document.getElementById('candidate-content');
+
+            // Toggle active tab style
+            ['credit', 'adult', 'bank'].forEach(k => {
+                const btn = document.getElementById(`tab-${k}`);
+                if (k === key) {
+                    btn.className = "px-3.5 py-1.5 text-xs font-bold rounded-lg transition bg-stone-900 text-white shadow-sm";
+                } else {
+                    btn.className = "px-3.5 py-1.5 text-xs font-bold rounded-lg transition bg-stone-100 text-stone-600 hover:bg-stone-200";
+                }
+            });
+
+            container.innerHTML = `
+                <div class="flex justify-between items-start">
+                    <div>
+                        <h4 class="font-bold text-stone-900 text-lg">${data.title}</h4>
+                        <span class="text-xs font-mono text-indigo-700">${data.repo}</span>
+                    </div>
+                    <span class="text-xs px-2.5 py-1 rounded-full font-bold ${data.badge}">${data.badgeText}</span>
+                </div>
+
+                <p class="text-xs text-stone-600 leading-relaxed">${data.description}</p>
+
+                <div class="grid grid-cols-2 gap-3 bg-stone-50 p-3 rounded-xl border border-stone-200/80 text-xs">
+                    <div><span class="text-stone-500">Sample Size:</span> <strong class="text-stone-800 font-mono block">${data.instances}</strong></div>
+                    <div><span class="text-stone-500">Predictor Features:</span> <strong class="text-stone-800 font-mono block">${data.features}</strong></div>
+                    <div><span class="text-stone-500">Target Variable:</span> <strong class="text-stone-800 font-mono block">${data.target}</strong></div>
+                    <div><span class="text-stone-500">Target Imbalance:</span> <strong class="text-stone-800 font-mono block">${data.imbalance}</strong></div>
+                </div>
+
+                <div class="space-y-2 pt-1 text-xs">
+                    <div class="font-bold text-stone-800">Analytical Considerations:</div>
+                    <ul class="space-y-1">
+                        ${data.pros.map(p => `<li class="text-emerald-800 flex items-start"><span class="mr-1.5">✓</span> ${p}</li>`).join('')}
+                        ${data.cons.map(c => `<li class="text-rose-800 flex items-start"><span class="mr-1.5">⚠️</span> ${c}</li>`).join('')}
+                    </ul>
+                </div>
+            `;
+        }
+
+        // -------------------------------------------------------------
+        // 3. EDA Diagnostics Charts (KDE vs Hist & Target Imbalance)
+        // -------------------------------------------------------------
+        function initEdaCharts() {
+            // Target Balance Pie
+            const ctxTarget = document.getElementById('targetChart').getContext('2d');
+            targetChartInstance = new Chart(ctxTarget, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Non-Default (Class 0)', 'Defaulted (Class 1)'],
+                    datasets: [{
+                        data: [23364, 6636],
+                        backgroundColor: ['#3b82f6', '#f59e0b'],
+                        borderWidth: 2,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { boxWidth: 12, font: { size: 11 } } }
+                    }
+                }
+            });
+
+            // Density / Histogram Chart
+            const ctxDist = document.getElementById('edaDistChart').getContext('2d');
+            edaDistChartInstance = new Chart(ctxDist, {
+                type: 'line',
+                data: {
+                    labels: ['10k', '50k', '100k', '150k', '200k', '250k', '300k', '400k', '500k+'],
+                    datasets: [
+                        {
+                            label: 'Non-Default Density',
+                            data: [12, 35, 68, 52, 40, 25, 18, 8, 3],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Default Density',
+                            data: [22, 48, 55, 32, 18, 10, 5, 2, 0.5],
+                            borderColor: '#f59e0b',
+                            backgroundColor: 'rgba(245, 158, 11, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { title: { display: true, text: 'Relative Density (%)', font: { size: 11 } } },
+                        x: { title: { display: true, text: 'Credit Limit (LIMIT_BAL in NT$)', font: { size: 11 } } }
+                    },
+                    plugins: {
+                        legend: { position: 'top', labels: { boxWidth: 10, font: { size: 11 } } }
+                    }
+                }
+            });
+        }
+
+        function toggleEdaChart(mode) {
+            const btnKde = document.getElementById('btn-kde');
+            const btnHist = document.getElementById('btn-hist');
+
+            if (mode === 'kde') {
+                btnKde.className = "px-2.5 py-1 text-xs font-bold rounded bg-white shadow-sm text-stone-800";
+                btnHist.className = "px-2.5 py-1 text-xs font-bold text-stone-500 hover:text-stone-800";
+                edaDistChartInstance.config.type = 'line';
+            } else {
+                btnHist.className = "px-2.5 py-1 text-xs font-bold rounded bg-white shadow-sm text-stone-800";
+                btnKde.className = "px-2.5 py-1 text-xs font-bold text-stone-500 hover:text-stone-800";
+                edaDistChartInstance.config.type = 'bar';
+            }
+            edaDistChartInstance.update();
+        }
+
+        // -------------------------------------------------------------
+        // 4. Scikit-Learn Pipeline Code Generator Logic
+        // -------------------------------------------------------------
+        function updatePipelineCode() {
+            const datasetId = document.getElementById('pipe-dataset').value;
+            const numImp = document.getElementById('pipe-num-imp').value;
+            const scaler = document.getElementById('pipe-scaler').value;
+            const unk = document.getElementById('pipe-unk').value;
+            const drop = document.getElementById('pipe-drop').value;
+
+            const codeOutput = document.getElementById('code-output');
+
+            if (datasetId === "42477") {
+                codeOutput.textContent = 
+`import numpy as np
+import pandas as pd
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import ${scaler}, OneHotEncoder, OrdinalEncoder
+
+# 1. Fetch Default Credit Card Clients from OpenML
+print("Fetching dataset 42477 from OpenML...")
+credit_data = fetch_openml(data_id=42477, as_frame=True, parser="auto")
+X = credit_data.data.copy()
+y = credit_data.target.astype(int)
+
+# 2. Define Feature Subsets based on EDA
+num_features = [
+    'LIMIT_BAL', 'AGE', 
+    'BILL_AMT1', 'BILL_AMT2', 'BILL_AMT3', 'BILL_AMT4', 'BILL_AMT5', 'BILL_AMT6',
+    'PAY_AMT1', 'PAY_AMT2', 'PAY_AMT3', 'PAY_AMT4', 'PAY_AMT5', 'PAY_AMT6'
+]
+nom_features = ['SEX', 'MARRIAGE']
+ord_features = ['EDUCATION', 'PAY_0', 'PAY_2', 'PAY_3', 'PAY_4', 'PAY_5', 'PAY_6']
+
+# 3. Clean Undocumented Anomalies in Ordinal & Nominal Columns
+X['EDUCATION'] = X['EDUCATION'].replace({0: 4, 5: 4, 6: 4})  # Consolidate unknown
+X['MARRIAGE'] = X['MARRIAGE'].replace({0: 3})               # Consolidate unknown
+
+# 4. Construct Sub-Pipelines
+num_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy='${numImp}')),
+    ('scaler', ${scaler}())
+])
+
+nom_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('onehot', OneHotEncoder(handle_unknown='${unk}', drop=${drop === 'None' ? 'None' : `'${drop}'`}))
+])
+
+ord_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('ordinal', OrdinalEncoder(handle_unknown='use_encoded_value', unknown_value=-1))
+])
+
+# 5. Master ColumnTransformer Synthesis
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', num_pipeline, num_features),
+        ('nom', nom_pipeline, nom_features),
+        ('ord', ord_pipeline, ord_features)
+    ],
+    remainder='drop'
+)
+
+# 6. Train/Test Split (Prevent Data Leakage)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# 7. Fit Preprocessor ONLY on Training Data & Transform Test Set
+X_train_transformed = preprocessor.fit_transform(X_train)
+X_test_transformed = preprocessor.transform(X_test)
+
+print(f"Transformed Training Shape: {X_train_transformed.shape}")
+print("Pipeline configured successfully without data leakage!")`;
+            } else {
+                codeOutput.textContent = 
+`import pandas as pd
+import numpy as np
+from sklearn.datasets import fetch_openml
+from sklearn.model_selection import train_test_split
+from sklearn.compose import ColumnTransformer
+from sklearn.pipeline import Pipeline
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import ${scaler}, OneHotEncoder, OrdinalEncoder
+
+# 1. Fetch Adult Census Income Dataset from OpenML
+census_data = fetch_openml(data_id=1590, as_frame=True, parser="auto")
+X = census_data.data.copy()
+y = (census_data.target == '>50K').astype(int)
+
+# 2. Convert string null indicators '?' to NaN
+X.replace('?', np.nan, inplace=True)
+
+num_features = ['age', 'fnlwgt', 'capital-gain', 'capital-loss', 'hours-per-week']
+nom_features = ['workclass', 'marital-status', 'occupation', 'relationship', 'race', 'sex', 'native-country']
+ord_features = ['education-num']
+
+# 3. Pipelines Setup
+num_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy='${numImp}')),
+    ('scaler', ${scaler}())
+])
+
+nom_pipeline = Pipeline([
+    ('imputer', SimpleImputer(strategy='most_frequent')),
+    ('onehot', OneHotEncoder(handle_unknown='${unk}', drop=${drop === 'None' ? 'None' : `'${drop}'`}))
+])
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', num_pipeline, num_features),
+        ('nom', nom_pipeline, nom_features),
+        ('ord', 'passthrough', ord_features)
+    ]
+)
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+X_train_prep = preprocessor.fit_transform(X_train)
+X_test_prep = preprocessor.transform(X_test)
+print("Adult Dataset Pipeline Fitted Successfully!")`;
+            }
+        }
+
+        function copyCode() {
+            const codeText = document.getElementById('code-output').textContent;
+            navigator.clipboard.writeText(codeText).then(() => {
+                const btn = document.getElementById('copy-btn');
+                btn.textContent = "✅ Copied!";
+                setTimeout(() => btn.textContent = "📋 Copy Code", 2000);
+            });
+        }
+
+        // -------------------------------------------------------------
+        // 5. Nomenclature Generator Logic
+        // -------------------------------------------------------------
+        function generateNomenclature() {
+            const s1Name = document.getElementById('s1-name').value.trim() || 'Student1';
+            const s1Num = document.getElementById('s1-num').value.trim() || '1111111';
+            const s2Name = document.getElementById('s2-name').value.trim() || 'Student2';
+            const s2Num = document.getElementById('s2-num').value.trim() || '2222222';
+            const s3Name = document.getElementById('s3-name').value.trim() || 'Student3';
+            const s3Num = document.getElementById('s3-num').value.trim() || '3333333';
+
+            const filename = `${s1Name}_${s1Num}_${s2Name}_${s2Num}_${s3Name}_${s3Num}.zip`;
+            document.getElementById('zip-output').textContent = filename;
+        }
+
+        function copyZipName() {
+            const text = document.getElementById('zip-output').textContent.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Zip filename copied to clipboard:\n" + text);
+            });
+        }
+    </script>
+</body>
+</html>
