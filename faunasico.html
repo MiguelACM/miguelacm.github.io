@@ -1,0 +1,745 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Fauna de Sicó</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Caderno de campo: folhas empilhadas sobre fundo de calcário, ilustrações a tinta com aguadas. */
+:root{
+  --paper:#E9ECE6; --sheet:#FAFBF7; --ink:#25312A; --muted:#5D6A62; --rule:#CDD4CC;
+  --moss:#6F8F4C; --ochre:#C4922F; --rust:#A44E2B; --sky:#5F87A6; --pale:#E6E4DA;
+  --stone:#D3D2C8; --wing:#6A5A4D; --fur:#9E7D5C; --owl:#A9804F; --owl2:#7A5937;
+  --under:#E0D8C6; --heron2:#6F6F7A; --otter:#6B4A32; --boar:#5A4C40; --boar2:#3D332B;
+  --genet:#CDBB98; --newt:#6E9A4E; --black:#2A2B2D; --yellow:#E2B522; --viper:#AD9C7C;
+  --viper2:#4E4133; --fish:#8E9C9A; --lamp:#8E7A5E; --cave:#EADBB2; --bfly:#D4772E;
+  --display:"Young Serif", Georgia, "Times New Roman", serif;
+  --body:"Literata", Georgia, "Times New Roman", serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --paper:#121714; --sheet:#1A201C; --ink:#E2E7DE; --muted:#A3AFA6; --rule:#343E37;
+  --moss:#8DB065; --ochre:#D9AD52; --rust:#CF7650; --sky:#86A9C6; --pale:#2C332E;
+  --stone:#3B423C; --wing:#5C4E43; --fur:#8E7052; --owl:#9A7448; --owl2:#6A4E31;
+  --under:#8C8574; --heron2:#5E5E68; --otter:#7A5640; --boar:#5E5045; --boar2:#463A31;
+  --genet:#A99A7C; --newt:#6E9A4E; --black:#151617; --yellow:#E2B522; --viper:#9C8C6E;
+  --viper2:#3A3026; --fish:#7F8D8B; --lamp:#86735A; --cave:#CDBF98; --bfly:#D4772E;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --paper:#121714; --sheet:#1A201C; --ink:#E2E7DE; --muted:#A3AFA6; --rule:#343E37;
+  --moss:#8DB065; --ochre:#D9AD52; --rust:#CF7650; --sky:#86A9C6; --pale:#2C332E;
+  --stone:#3B423C; --wing:#5C4E43; --fur:#8E7052; --owl:#9A7448; --owl2:#6A4E31;
+  --under:#8C8574; --heron2:#5E5E68; --otter:#7A5640; --boar:#5E5045; --boar2:#463A31;
+  --genet:#A99A7C; --newt:#6E9A4E; --black:#151617; --yellow:#E2B522; --viper:#9C8C6E;
+  --viper2:#3A3026; --fish:#7F8D8B; --lamp:#86735A; --cave:#CDBF98; --bfly:#D4772E;
+  color-scheme:dark}
+
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:28px 48px}
+.book{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.sheet{background:var(--sheet);border:1px solid var(--rule);border-radius:3px;padding:clamp(20px,5vw,48px);position:relative;
+  box-shadow:0 1px 0 var(--rule), 0 10px 24px -18px rgba(0,0,0,.35)}
+.folio{display:flex;justify-content:space-between;gap:12px;margin-top:28px;padding-top:12px;border-top:1px solid var(--rule);
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;line-height:1.15;margin:0}
+h2{font-size:clamp(26px,4.6vw,34px)}
+h3{font-size:21px}
+p{margin:0}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);margin-bottom:8px}
+.lede{font-size:17.5px;max-width:62ch;margin-top:12px}
+.stack{display:flex;flex-direction:column;gap:14px}
+.sci{font-style:italic;color:var(--muted);font-size:15px}
+a{color:var(--rust);text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--sky);outline-offset:2px}
+
+/* capa */
+.cover{padding:0;overflow:hidden}
+.cover .art{display:block;width:100%;height:auto}
+.cover .titles{padding:clamp(22px,5vw,48px);padding-top:8px}
+.cover h1{font-size:clamp(46px,10vw,84px);letter-spacing:-.01em}
+.cover .sub{font-family:var(--mono);font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:10px}
+.cover .intro{margin-top:18px;max-width:58ch;font-size:17px}
+
+/* fichas */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 26px;margin-top:24px}
+.grid.one{grid-template-columns:minmax(0,1fr)}
+.sp{display:flex;flex-direction:column;gap:8px;min-width:0}
+.sp.wide{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:8px 26px;align-items:start}
+.sp.wide .ill{grid-row:span 2}
+.ill{width:100%;height:auto;aspect-ratio:200/140;max-width:100%;background:var(--pale);border-radius:2px}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.tag{font-family:var(--mono);font-size:11px;letter-spacing:.04em;padding:2px 7px;border:1px solid var(--rule);border-radius:2px;color:var(--muted)}
+.tag.ok{border-color:var(--moss);color:var(--moss)}
+.tag.prov{border-color:var(--ochre);color:var(--ochre)}
+.tag.no{border-color:var(--rust);color:var(--rust)}
+.m{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:2px;margin:4px 0 2px;max-width:330px}
+.m span{font-family:var(--mono);font-size:10.5px;text-align:center;padding:2px 0;background:var(--pale);color:var(--muted);border-radius:1px}
+.m span.on{background:var(--moss);color:var(--sheet);font-weight:500}
+dl{margin:0;display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;font-size:15px}
+dt{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);padding-top:3px}
+dd{margin:0}
+
+/* listas curtas */
+.mini{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 26px;margin-top:22px;padding-top:18px;border-top:1px dashed var(--rule)}
+.mini div{min-width:0;font-size:15px}
+.mini b{font-family:var(--display);font-weight:400;font-size:17px;display:block}
+.note{margin-top:22px;padding:14px 16px;border-left:3px solid var(--rust);background:var(--pale);font-size:15px}
+.note.green{border-left-color:var(--moss)}
+
+/* mapa e legenda */
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:26px;margin-top:22px;align-items:start}
+.map{width:100%;height:auto;max-width:100%}
+.legend{display:flex;flex-direction:column;gap:12px;font-size:15px}
+.legend .row{display:flex;gap:10px;align-items:flex-start}
+.legend .row > :first-child{flex:0 0 auto}
+
+/* tabelas */
+.tbl{overflow-x:auto;margin-top:20px}
+table{border-collapse:collapse;width:100%;font-size:14.5px;min-width:520px}
+th,td{text-align:left;vertical-align:top;padding:8px 10px;border-bottom:1px solid var(--rule)}
+th{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);font-weight:500}
+td:first-child{font-family:var(--display);white-space:nowrap}
+
+.rules{counter-reset:r;display:grid;gap:16px;margin-top:22px}
+.rules li{list-style:none;display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px}
+.rules li::before{counter-increment:r;content:counter(r);font-family:var(--display);font-size:22px;color:var(--rust);line-height:1.2}
+.rules{padding:0}
+.src{font-size:13.5px;color:var(--muted);columns:2;column-gap:26px;margin-top:14px;padding-left:18px}
+.src li{margin-bottom:6px;break-inside:avoid}
+
+/* ilustrações: traço a tinta e aguadas */
+.ill,.inkg{stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round;stroke-linecap:round;fill:var(--ink)}
+.ln{fill:none}
+.nos{stroke:none}
+.f-ink{fill:var(--ink)} .f-pale{fill:var(--pale)} .f-och{fill:var(--ochre)} .f-stone{fill:var(--stone)}
+.f-wing{fill:var(--wing)} .f-fur{fill:var(--fur)} .f-owl{fill:var(--owl)} .f-owl2{fill:var(--owl2)}
+.f-under{fill:var(--under)} .f-brown{fill:var(--owl2)} .f-heron{fill:var(--rust)} .f-heron2{fill:var(--heron2)}
+.f-otter{fill:var(--otter)} .f-boar{fill:var(--boar)} .f-boar2{fill:var(--boar2)} .f-genet{fill:var(--genet)}
+.f-newt{fill:var(--newt)} .f-black{fill:var(--black)} .f-yellow{fill:var(--yellow)} .f-viper{fill:var(--viper)}
+.f-fish{fill:var(--fish)} .f-lamp{fill:var(--lamp)} .f-cave{fill:var(--cave)} .f-bfly{fill:var(--bfly)}
+.f-moss{fill:var(--moss)} .f-sky{fill:var(--sky)}
+.s-moss{fill:none;stroke:var(--moss);stroke-width:2.2}
+.s-sky{fill:none;stroke:var(--sky);stroke-width:1.8}
+.neck{fill:none;stroke:var(--rust);stroke-width:8}
+.tail1{fill:none;stroke:var(--genet);stroke-width:9}
+.tail2{fill:none;stroke:var(--ink);stroke-width:9;stroke-dasharray:5 7}
+.leg{fill:none;stroke:var(--newt);stroke-width:4.5}
+.salo{fill:none;stroke:var(--ink);stroke-width:17}
+.sal{fill:none;stroke:var(--black);stroke-width:14}
+.sleg{fill:none;stroke:var(--black);stroke-width:5}
+.vipo{fill:none;stroke:var(--ink);stroke-width:15}
+.vip{fill:none;stroke:var(--viper);stroke-width:12}
+.vipz{fill:none;stroke:var(--viper2);stroke-width:6;stroke-dasharray:7 6;stroke-linecap:butt}
+.lzb{fill:var(--lzb, var(--moss))}
+.lzh{fill:var(--lzh, var(--moss))}
+.lzleg{fill:none;stroke:var(--lzb, var(--moss));stroke-width:5}
+.oc{fill:var(--sky);opacity:var(--ocop,1)}
+.sp-a{fill:none;stroke:var(--ink);stroke-width:1.4}
+.bleg{fill:none;stroke:var(--ink);stroke-width:1.6}
+.map *{vector-effect:non-scaling-stroke}
+.map text{font-family:var(--mono);font-size:10px;fill:var(--ink);stroke:none}
+.map .lbl-s{fill:var(--muted);font-size:9px}
+
+@media (max-width:640px){
+  .grid,.mini,.two{grid-template-columns:minmax(0,1fr)}
+  .sp.wide{grid-template-columns:minmax(0,1fr)}
+  .sp.wide .ill{grid-row:auto}
+  .src{columns:1}
+}
+@media (prefers-reduced-motion: no-preference){
+  .cover .bats path{animation:flit 6s ease-in-out infinite alternate}
+  .cover .bats path:nth-child(2){animation-delay:-2s}
+  .cover .bats path:nth-child(3){animation-delay:-4s}
+}
+@keyframes flit{from{transform:translate(0,0)}to{transform:translate(6px,-4px)}}
+</style>
+
+<!-- Biblioteca de ilustrações originais -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs class="lib">
+  <symbol id="i-bat" viewBox="0 0 200 140">
+    <path class="f-wing" d="M100 58 C84 40 52 30 12 40 C22 50 24 62 20 76 C34 68 46 72 50 84 C58 74 72 76 78 88 C84 78 92 74 100 76 Z"/>
+    <path class="f-wing" d="M100 58 C116 40 148 30 188 40 C178 50 176 62 180 76 C166 68 154 72 150 84 C142 74 128 76 122 88 C116 78 108 74 100 76 Z"/>
+    <path class="ln" d="M96 60 Q64 46 16 41 M62 47 L22 74 M62 47 L50 82 M62 47 L78 86 M104 60 Q136 46 184 41 M138 47 L178 74 M138 47 L150 82 M138 47 L122 86"/>
+    <ellipse class="f-fur" cx="100" cy="72" rx="11" ry="20"/>
+    <path class="f-fur" d="M92 46 L88 32 L98 40 Z M108 46 L112 32 L102 40 Z"/>
+    <circle class="f-fur" cx="100" cy="50" r="10"/>
+    <circle class="f-ink nos" cx="96" cy="49" r="1.6"/><circle class="f-ink nos" cx="104" cy="49" r="1.6"/>
+    <path class="ln" d="M97 55 Q100 57 103 55"/>
+  </symbol>
+
+  <symbol id="i-owl" viewBox="0 0 200 140">
+    <path class="f-stone" d="M30 140 L44 120 L80 114 L120 116 L158 121 L172 140 Z"/>
+    <path class="f-owl" d="M100 40 C128 40 140 70 136 96 C133 112 120 120 100 120 C80 120 67 112 64 96 C60 70 72 40 100 40 Z"/>
+    <path class="f-owl2" d="M70 66 C61 90 69 112 92 119 C80 104 75 88 70 66 Z"/>
+    <path class="f-owl2" d="M130 66 C139 90 131 112 108 119 C120 104 125 88 130 66 Z"/>
+    <path class="ln" d="M92 76 L94 86 M100 73 L100 86 M108 76 L106 86 M88 92 L91 103 M100 92 L100 105 M112 92 L109 103"/>
+    <path class="f-owl" d="M76 30 L70 9 L88 23 C96 21 104 21 112 23 L130 9 L124 30 C131 41 128 56 118 62 C108 68 92 68 82 62 C72 56 69 41 76 30 Z"/>
+    <path class="f-pale" d="M80 41 C84 31 98 33 100 42 C102 33 116 31 120 41 C124 51 115 60 100 60 C85 60 76 51 80 41 Z"/>
+    <circle class="f-och" cx="90" cy="44" r="6.5"/><circle class="f-och" cx="110" cy="44" r="6.5"/>
+    <circle class="f-ink nos" cx="90" cy="44" r="3"/><circle class="f-ink nos" cx="110" cy="44" r="3"/>
+    <path class="f-ink" d="M97 50 L103 50 L100 57 Z"/>
+    <path class="ln" d="M90 120 L88 127 M94 120 L94 127 M106 120 L106 127 M110 120 L112 127"/>
+  </symbol>
+
+  <symbol id="i-eagle" viewBox="0 0 200 140">
+    <path class="f-under" d="M100 62 L60 56 L22 50 L12 56 L20 60 L8 64 L20 67 L12 72 L26 74 L60 77 L100 82 Z"/>
+    <path class="f-under" d="M100 62 L140 56 L178 50 L188 56 L180 60 L192 64 L180 67 L188 72 L174 74 L140 77 L100 82 Z"/>
+    <path class="ln" d="M32 60 L72 64 M30 68 L74 71 M168 60 L128 64 M170 68 L126 71"/>
+    <path class="f-under" d="M91 88 L109 88 L115 114 L85 114 Z"/>
+    <path class="ln" d="M88 100 L112 100 M86 108 L114 108"/>
+    <ellipse class="f-under" cx="100" cy="76" rx="11" ry="18"/>
+    <path class="f-brown" d="M89 69 C89 59 111 59 111 69 C108 74 92 74 89 69 Z"/>
+    <circle class="f-brown" cx="100" cy="56" r="10"/>
+    <circle class="f-och" cx="96" cy="54" r="2.4"/><circle class="f-och" cx="104" cy="54" r="2.4"/>
+    <path class="f-ink" d="M98 60 L102 60 L100 64 Z"/>
+  </symbol>
+
+  <symbol id="i-heron" viewBox="0 0 200 140">
+    <path class="s-moss" d="M150 140 Q148 100 156 58 M161 140 Q161 104 170 70 M30 140 Q34 110 26 78 M41 140 Q41 116 47 92"/>
+    <path class="s-sky" d="M18 126 L182 126 M42 133 L158 133"/>
+    <path class="ln" d="M108 91 L104 126 M117 89 L121 126 M104 126 L97 129 M121 126 L128 129"/>
+    <path class="f-heron" d="M80 78 C90 66 120 62 140 70 C150 74 156 80 162 90 C140 93 112 96 96 92 C88 90 82 86 80 78 Z"/>
+    <path class="f-heron2" d="M96 74 C112 67 136 70 154 84 C132 87 112 87 98 84 Z"/>
+    <path class="neck" d="M85 78 C70 66 93 50 79 34"/>
+    <path class="ln" d="M86 76 C73 66 95 50 81 36"/>
+    <ellipse class="f-heron" cx="77" cy="31" rx="8" ry="5.5"/>
+    <path class="f-ink" d="M72 28 C76 25 82 26 85 29 C80 28 76 28 72 30 Z"/>
+    <path class="f-och" d="M71 30 L43 34 L71 34 Z"/>
+    <circle class="f-ink nos" cx="76" cy="30" r="1.3"/>
+  </symbol>
+
+  <symbol id="i-otter" viewBox="0 0 200 140">
+    <path class="s-sky" d="M8 104 Q28 99 48 104 T88 104 T128 104 T168 104 T198 104 M26 115 Q46 110 66 115 T106 115 T146 115"/>
+    <path class="f-otter" d="M140 85 L143 99 L151 99 L148 85 Z M90 88 L87 101 L95 101 L98 88 Z"/>
+    <path class="f-otter" d="M14 94 C38 88 56 80 76 74 C100 66 130 63 152 67 C164 69 171 65 180 63 C190 61 195 71 189 78 C181 86 166 86 152 88 C130 92 100 92 80 90 C58 90 36 98 14 94 Z"/>
+    <path class="f-pale" d="M176 80 C182 82 188 80 190 77 C186 84 178 86 170 85 Z"/>
+    <circle class="f-otter" cx="176" cy="62" r="3"/>
+    <circle class="f-ink nos" cx="184" cy="68" r="1.7"/>
+    <circle class="f-ink" cx="192" cy="73" r="2"/>
+    <path class="ln" d="M186 75 L198 71 M186 77 L198 77"/>
+  </symbol>
+
+  <symbol id="i-boar" viewBox="0 0 200 140">
+    <path class="f-boar2" d="M52 96 L49 117 L59 117 L62 98 Z M122 100 L120 118 L130 118 L132 100 Z"/>
+    <path class="f-boar" d="M36 86 C36 62 70 50 110 52 C138 54 156 64 168 80 L184 88 C186 96 178 100 168 98 L160 98 L156 117 L146 117 L146 100 L82 102 L80 118 L70 118 L66 100 C48 100 36 98 36 86 Z"/>
+    <path class="ln" d="M70 56 L68 49 M80 53 L79 46 M90 52 L90 45 M100 52 L101 45 M110 52 L112 45 M120 54 L123 47 M130 56 L134 50"/>
+    <path class="f-boar2" d="M150 66 L147 53 L158 63 Z"/>
+    <circle class="f-ink nos" cx="161" cy="76" r="1.9"/>
+    <ellipse class="f-boar2" cx="184" cy="92" rx="4" ry="6"/>
+    <path class="f-pale" d="M173 95 C175 89 179 86 182 86 C178 90 178 94 176 97 Z"/>
+    <path class="ln" d="M37 82 C30 84 30 92 25 92"/>
+  </symbol>
+
+  <symbol id="i-genet" viewBox="0 0 200 140">
+    <path class="tail1" d="M46 81 C28 85 16 98 8 118"/>
+    <path class="tail2" d="M46 81 C28 85 16 98 8 118"/>
+    <path class="f-genet" d="M42 80 C56 68 110 64 146 70 L166 64 C172 62 178 64 182 70 L194 76 L182 82 C176 86 166 86 158 84 C150 88 130 92 112 90 L110 108 L102 108 L100 90 L66 90 L64 108 L56 108 L56 88 C48 86 42 84 42 80 Z"/>
+    <path class="f-genet" d="M164 66 L162 54 L172 62 Z M172 64 L175 54 L180 66 Z"/>
+    <g class="nos f-ink">
+      <circle cx="70" cy="78" r="3"/><circle cx="84" cy="74" r="3"/><circle cx="98" cy="72" r="3"/><circle cx="112" cy="72" r="3"/><circle cx="126" cy="74" r="3"/>
+      <circle cx="78" cy="86" r="2.6"/><circle cx="94" cy="84" r="2.6"/><circle cx="110" cy="82" r="2.6"/><circle cx="126" cy="82" r="2.6"/><circle cx="140" cy="78" r="2.6"/>
+    </g>
+    <circle class="f-ink nos" cx="178" cy="71" r="1.6"/>
+    <circle class="f-ink" cx="193" cy="76.5" r="1.4"/>
+  </symbol>
+
+  <symbol id="i-newt" viewBox="0 0 200 140">
+    <path class="leg" d="M150 94 L157 110 L165 112 M146 82 L152 66 L160 64 M70 94 L62 110 L54 112 M74 82 L66 66 L58 64"/>
+    <path class="f-newt" d="M14 84 C38 80 60 78 80 78 C110 78 140 76 160 80 C174 82 186 86 191 92 C185 98 172 98 160 96 C140 96 110 98 80 98 C56 98 34 94 14 84 Z"/>
+    <path class="f-black" d="M40 80 L50 70 L58 78 L68 66 L76 76 L86 64 L96 75 L106 63 L116 74 L126 64 L134 76 L144 70 L150 79 Z"/>
+    <g class="nos f-black">
+      <ellipse cx="60" cy="88" rx="7" ry="4"/><ellipse cx="88" cy="85" rx="9" ry="4.5"/><ellipse cx="118" cy="90" rx="8" ry="4"/><ellipse cx="144" cy="85" rx="7" ry="4"/><ellipse cx="34" cy="85" rx="5" ry="2.6"/><ellipse cx="166" cy="90" rx="5" ry="3"/>
+    </g>
+    <circle class="f-och" cx="178" cy="86" r="2.6"/>
+  </symbol>
+
+  <symbol id="i-sal" viewBox="0 0 200 140">
+    <path class="sleg" d="M86 82 L76 64 L70 62 M92 84 L102 100 L108 102 M136 76 L130 58 L124 56 M141 80 L151 96 L158 97"/>
+    <path class="salo" d="M22 104 C56 116 78 72 110 72 C140 72 150 90 172 84"/>
+    <path class="sal" d="M22 104 C56 116 78 72 110 72 C140 72 150 90 172 84"/>
+    <ellipse class="f-black" cx="178" cy="82" rx="13" ry="9.5"/>
+    <g class="nos f-yellow">
+      <ellipse cx="40" cy="108" rx="3.5" ry="2.6"/><ellipse cx="62" cy="99" rx="4" ry="3"/><ellipse cx="80" cy="84" rx="4" ry="3.4"/><ellipse cx="98" cy="74" rx="4.5" ry="3.2"/>
+      <ellipse cx="118" cy="72" rx="4.5" ry="3.2"/><ellipse cx="138" cy="78" rx="4" ry="3"/><ellipse cx="156" cy="86" rx="3.8" ry="2.8"/><ellipse cx="174" cy="77" rx="4" ry="2.6"/><ellipse cx="174" cy="88" rx="4" ry="2.6"/>
+    </g>
+    <circle class="f-ink nos" cx="186" cy="80" r="1.5"/>
+  </symbol>
+
+  <symbol id="i-lizard" viewBox="0 0 200 140">
+    <path class="lzleg" d="M104 96 L97 112 L88 115 M142 98 L148 114 L157 116 M112 84 L118 70 L126 68 M150 84 L156 72 L164 70"/>
+    <path class="lzb" d="M86 86 C58 90 32 96 6 113 C32 103 58 99 86 98 Z"/>
+    <path class="lzb" d="M80 86 C100 76 130 74 150 78 C160 80 170 82 178 86 C186 88 194 92 195 96 C187 100 176 100 168 98 C150 100 120 102 80 98 Z"/>
+    <path class="lzh" d="M158 80 C170 80 186 86 195 95 C187 100 176 100 162 98 Z"/>
+    <circle class="oc" cx="110" cy="88" r="3.4"/><circle class="oc" cx="123" cy="86" r="3.4"/><circle class="oc" cx="136" cy="88" r="3.4"/><circle class="oc" cx="148" cy="88" r="3"/>
+    <circle class="f-ink nos" cx="181" cy="88" r="1.7"/>
+  </symbol>
+
+  <symbol id="i-viper" viewBox="0 0 200 140">
+    <path class="vipo" d="M18 110 C48 132 80 122 90 102 C100 82 130 74 150 86 C164 94 168 82 174 74"/>
+    <path class="vip" d="M18 110 C48 132 80 122 90 102 C100 82 130 74 150 86 C164 94 168 82 174 74"/>
+    <path class="vipz" d="M24 114 C48 132 80 122 90 102 C100 82 130 74 150 86 C164 94 168 82 172 77"/>
+    <path class="f-viper" d="M168 78 L184 62 C190 59 196 63 194 70 L181 84 Z"/>
+    <path class="f-viper" d="M192 64 L199 57 L196 67 Z"/>
+    <circle class="f-ink nos" cx="186" cy="67" r="1.6"/>
+  </symbol>
+
+  <symbol id="i-fish" viewBox="0 0 200 140">
+    <path class="f-fish" d="M92 52 L104 34 L116 52 Z"/>
+    <path class="f-fish" d="M28 70 C60 46 130 46 160 64 L190 46 L184 70 L190 94 L160 76 C130 94 60 94 28 70 Z"/>
+    <path class="f-pale nos" d="M42 76 C70 89 128 89 156 74 C128 83 70 83 42 76 Z"/>
+    <path class="f-fish" d="M98 86 L106 99 L112 86 Z M62 76 L71 88 L76 76 Z"/>
+    <path class="ln" d="M42 67 C80 62 130 62 158 67"/>
+    <circle class="f-pale" cx="44" cy="65" r="4.2"/><circle class="f-ink nos" cx="44" cy="65" r="2"/>
+    <path class="ln" d="M30 71 L36 72"/>
+  </symbol>
+
+  <symbol id="i-lamprey" viewBox="0 0 200 140">
+    <path class="s-sky" d="M10 112 L190 112"/>
+    <path class="f-lamp" d="M8 84 C40 70 80 92 120 78 C150 68 172 70 192 74 C195 78 193 84 186 86 C168 88 150 84 120 92 C80 106 40 88 8 92 Z"/>
+    <path class="ln" d="M60 86 C80 90 100 86 116 80"/>
+    <g class="nos f-ink"><circle cx="146" cy="79" r="1.5"/><circle cx="150.5" cy="78.6" r="1.5"/><circle cx="155" cy="78.3" r="1.5"/><circle cx="159.5" cy="78" r="1.5"/><circle cx="164" cy="77.8" r="1.5"/><circle cx="168.5" cy="77.6" r="1.5"/><circle cx="173" cy="77.5" r="1.5"/></g>
+    <circle class="f-pale" cx="182" cy="76" r="2.6"/>
+  </symbol>
+
+  <symbol id="i-beetle" viewBox="0 0 200 140">
+    <path class="bleg" d="M78 60 L54 52 L44 38 M76 76 L48 80 L34 72 M80 96 L56 112 L48 128 M122 60 L146 52 L156 38 M124 76 L152 80 L166 72 M120 96 L144 112 L152 128 M95 26 L86 12 M105 26 L114 12"/>
+    <ellipse class="f-cave" cx="100" cy="80" rx="26" ry="40"/>
+    <path class="f-cave" d="M80 50 C84 38 116 38 120 50 C112 54 88 54 80 50 Z"/>
+    <ellipse class="f-cave" cx="100" cy="34" rx="12" ry="8"/>
+    <path class="ln" d="M100 52 L100 118"/>
+  </symbol>
+
+  <symbol id="i-bfly" viewBox="0 0 200 140">
+    <path class="f-bfly" d="M99 70 C90 40 60 24 30 30 C24 46 40 66 98 77 Z"/>
+    <path class="f-bfly" d="M101 70 C110 40 140 24 170 30 C176 46 160 66 102 77 Z"/>
+    <path class="f-bfly" d="M98 79 C60 81 44 97 52 115 C70 121 92 105 98 85 Z"/>
+    <path class="f-bfly" d="M102 79 C140 81 156 97 148 115 C130 121 108 105 102 85 Z"/>
+    <path class="ln" d="M42 35 L96 72 M62 29 L98 70 M34 50 L96 75 M158 35 L104 72 M138 29 L102 70 M166 50 L104 75 M56 104 L96 83 M64 116 L97 87 M144 104 L104 83 M136 116 L103 87 M50 112 C64 108 84 96 96 84 M150 112 C136 108 116 96 104 84"/>
+    <g class="nos f-pale"><circle cx="52" cy="42" r="3"/><circle cx="66" cy="50" r="3"/><circle cx="82" cy="58" r="3"/><circle cx="148" cy="42" r="3"/><circle cx="134" cy="50" r="3"/><circle cx="118" cy="58" r="3"/><circle cx="64" cy="102" r="2.8"/><circle cx="76" cy="95" r="2.8"/><circle cx="136" cy="102" r="2.8"/><circle cx="124" cy="95" r="2.8"/></g>
+    <ellipse class="f-ink" cx="100" cy="80" rx="3.5" ry="20"/>
+    <path class="ln" d="M99 62 L90 44 M101 62 L110 44"/>
+    <circle class="f-ink nos" cx="90" cy="44" r="2"/><circle class="f-ink nos" cx="110" cy="44" r="2"/>
+  </symbol>
+</defs>
+</svg>
+
+<main class="book">
+
+<!-- 1 · Capa -->
+<section class="sheet cover" aria-label="Capa">
+  <svg class="art" viewBox="0 0 600 300" role="img" aria-label="Escarpas calcárias ao entardecer, com um bufo-real pousado e morcegos em voo">
+    <rect width="600" height="300" fill="var(--pale)"/>
+    <circle cx="470" cy="78" r="34" fill="var(--sheet)" stroke="var(--ink)" stroke-width="1.6"/>
+    <path d="M0 190 C80 150 150 160 220 140 C300 118 360 150 440 128 C510 110 560 130 600 120 L600 300 L0 300 Z" fill="var(--stone)" stroke="var(--ink)" stroke-width="1.6"/>
+    <path d="M0 230 C70 205 140 214 200 196 L230 196 L236 172 L262 164 L270 186 L300 190 C360 196 420 182 480 192 C540 200 570 190 600 194 L600 300 L0 300 Z" fill="var(--moss)" stroke="var(--ink)" stroke-width="1.6"/>
+    <path d="M236 172 L240 300 M262 164 L258 300 M248 200 L252 260" fill="none" stroke="var(--ink)" stroke-width="1.2" opacity=".55"/>
+    <g fill="var(--owl2)" stroke="var(--ink)" stroke-width="1.6">
+      <ellipse cx="80" cy="244" rx="16" ry="12"/><ellipse cx="104" cy="250" rx="13" ry="10"/><ellipse cx="380" cy="240" rx="18" ry="13"/><ellipse cx="404" cy="246" rx="12" ry="10"/><ellipse cx="540" cy="244" rx="15" ry="11"/>
+    </g>
+    <g fill="none" stroke="var(--ink)" stroke-width="1.6"><path d="M80 256 L80 272 M104 260 L104 272 M380 253 L380 272 M404 256 L404 272 M540 255 L540 272"/></g>
+    <g class="inkg" transform="translate(232 128) scale(.36)"><use href="#i-owl"/></g>
+    <g class="bats" fill="var(--ink)">
+      <path d="M380 92 q8 -8 14 0 q6 -8 14 0 q-7 -2 -14 6 q-7 -8 -14 -6 Z"/>
+      <path d="M332 70 q6 -6 10 0 q4 -6 10 0 q-5 -1 -10 4 q-5 -5 -10 -4 Z"/>
+      <path d="M420 120 q5 -5 9 0 q4 -5 9 0 q-5 -1 -9 4 q-4 -5 -9 -4 Z"/>
+    </g>
+    <path d="M0 300 L0 280 C120 270 240 286 360 278 C460 272 540 282 600 276 L600 300 Z" fill="var(--sheet)" stroke="none"/>
+  </svg>
+  <div class="titles">
+    <p class="eyebrow">Caderno de campo</p>
+    <h1>Fauna de Sicó</h1>
+    <p class="sub">Condeixa-a-Nova · Maciço de Sicó · Paul de Arzila</p>
+    <p class="intro">Um guia curto para reconhecer os animais da região e saber quando e onde os procurar. Cada ficha diz se a espécie está confirmada em fontes locais ou se é apenas provável, mostra os meses bons para a ver e as pistas que deixa no terreno.</p>
+  </div>
+  <div class="folio" style="margin-inline:clamp(20px,5vw,48px);margin-bottom:22px"><span>Ilustrações originais</span><span>Novembro de 2026</span></div>
+</section>
+
+<!-- 2 · Antes de sair -->
+<section class="sheet">
+  <p class="eyebrow">Antes de sair</p>
+  <h2>Dois mundos a 20 km um do outro</h2>
+  <p class="lede">O <b>carso de Sicó</b> é calcário: lapiás, canhões, carvalhais de carvalho-cerquinho e mais de 300 grutas. É protegido sobretudo pelos morcegos e pela fauna que só existe nas suas grutas. O <b>Paul de Arzila</b>, em parte na freguesia de Anobra, é um pântano de caniçal com 181 espécies de vertebrados e o sítio onde ver animais é mais garantido.</p>
+  <div class="two">
+    <svg class="map" viewBox="0 0 280 390" role="img" aria-label="Esquema dos locais de observação entre Coimbra e Alvaiázere">
+      <rect x="1" y="1" width="278" height="388" fill="var(--pale)" stroke="var(--rule)"/>
+      <path d="M140 140 C175 130 230 150 246 200 C262 250 250 330 226 372 C200 386 160 360 140 320 C120 290 70 280 60 250 C50 214 100 150 140 140 Z" fill="var(--stone)" stroke="var(--ink)" stroke-width="1.2"/>
+      <text x="150" y="232" class="lbl-s">MACIÇO DE SICÓ</text>
+      <path d="M58 70 C70 60 96 64 100 76 C102 88 84 94 68 90 C56 86 50 78 58 70 Z" fill="var(--moss)" opacity=".75" stroke="var(--ink)" stroke-width="1.2"/>
+      <path d="M100 18 C130 40 170 46 200 40 L270 34" fill="none" stroke="var(--sky)" stroke-width="2"/>
+      <text x="214" y="28" class="lbl-s">rio Mondego</text>
+      <g fill="var(--ink)">
+        <circle cx="177" cy="45" r="4"/><circle cx="78" cy="77" r="4"/><circle cx="119" cy="126" r="4"/><circle cx="130" cy="138" r="3"/>
+        <circle cx="161" cy="159" r="4"/><circle cx="210" cy="192" r="4"/><circle cx="61" cy="233" r="4"/><circle cx="119" cy="257" r="4"/>
+        <circle cx="177" cy="290" r="4"/><circle cx="219" cy="355" r="4"/>
+      </g>
+      <text x="184" y="49">Coimbra</text>
+      <text x="22" y="108">Paul de Arzila</text>
+      <text x="58" y="124">Condeixa</text>
+      <text x="138" y="136">Conímbriga</text><text x="138" y="147" class="lbl-s">Rio dos Mouros</text>
+      <text x="169" y="163">Buracas do Casmilo</text>
+      <text x="200" y="210">Penela</text>
+      <text x="16" y="250">Vale dos Poios</text>
+      <text x="74" y="276">Serra de Sicó</text>
+      <text x="186" y="294">Ansião</text>
+      <text x="150" y="374">Alvaiázere</text>
+      <text x="12" y="382" class="lbl-s">Esquema aproximado, sem escala · N ↑</text>
+    </svg>
+    <div class="legend">
+      <div class="row"><span class="tag ok">Confirmada</span><span>Registada em fontes sobre Sicó, Condeixa ou Arzila.</span></div>
+      <div class="row"><span class="tag prov">Provável</span><span>Habitat e distribuição apontam para ela, mas falta registo local publicado.</span></div>
+      <div class="row"><span class="tag no">Não confirmada</span><span>Sem prova regional. Se a vir, registe a observação.</span></div>
+      <div class="stack" style="gap:6px">
+        <div class="m" data-m="001111000000" aria-label="Exemplo: março a junho"></div>
+        <span>A barra de meses marca a <b>melhor época</b> para procurar cada espécie.</span>
+      </div>
+      <p style="color:var(--muted);font-size:14px">As dicas de horário e de pistas no terreno seguem a história natural geral da Península Ibérica quando não há registo local específico.</p>
+    </div>
+  </div>
+  <div class="folio"><span>Fauna de Sicó</span><span>p. 2</span></div>
+</section>
+
+<!-- 3 · Morcegos -->
+<section class="sheet">
+  <p class="eyebrow">Mamíferos voadores</p>
+  <h2>Os morcegos das grutas</h2>
+  <p class="lede">São a razão principal da proteção de Sicó. As grutas do maciço guardam abrigos de importância nacional para três espécies cavernícolas. Desde 2026 é <b>proibido entrar</b> em grutas com colónias, por isso observam-se cá fora, ao entardecer.</p>
+  <div class="grid">
+    <article class="sp wide">
+      <img class="ill" style="object-fit: cover;" src="https://montejunto.pt/wp-content/uploads/2020/06/Miniopterus-schreibersii.jpg" alt="Foto de morcego-de-peluche">
+      <div class="stack" style="gap:6px">
+        <h3>Morcego-de-peluche</h3>
+        <p class="sci">Miniopterus schreibersii</p>
+        <div class="tags"><span class="tag ok">Confirmada</span><span class="tag">Cria e hiberna em Sicó</span></div>
+      </div>
+      <div class="stack" style="gap:8px">
+        <div class="m" data-m="000111111100"></div>
+        <dl>
+          <dt>Onde</dt><dd>Algar da Água (Alvaiázere) tem uma colónia de hibernação de importância nacional. Caça sobre vales, rios e orlas de carvalhal.</dd>
+          <dt>Como</dt><dd>Ao pôr do sol, voo alto, rápido e direto, de asas longas e estreitas. Um detetor de ultrassons ajuda. De novembro a fevereiro hiberna: não procurar.</dd>
+        </dl>
+      </div>
+    </article>
+    <article class="sp">
+      <h3>Morcego-rato-grande</h3>
+      <p class="sci">Myotis myotis</p>
+      <div class="tags"><span class="tag ok">Confirmada</span><span class="tag">Colónias de criação</span></div>
+      <div class="m" data-m="000011111000"></div>
+      <dl><dt>Onde</dt><dd>Prados e clareiras da serra, Vale do Rabaçal.</dd>
+      <dt>Como</dt><dd>Grande, voa baixo e apanha escaravelhos do chão ao crepúsculo.</dd></dl>
+    </article>
+    <article class="sp">
+      <h3>Morcego-de-ferradura-grande</h3>
+      <p class="sci">Rhinolophus ferrumequinum</p>
+      <div class="tags"><span class="tag ok">Confirmada</span><span class="tag">Hiberna em Sicó</span></div>
+      <div class="m" data-m="000111111100"></div>
+      <dl><dt>Onde</dt><dd>Sebes, muros e orlas de bosque.</dd>
+      <dt>Como</dt><dd>Voo baixo e lento. Nariz com "folha" em ferradura. Hiberna de novembro a março, envolto nas asas.</dd></dl>
+    </article>
+  </div>
+  <div class="note">Na área do parque eólico de Alvaiázere estão registadas 12 espécies de morcegos com estatuto desfavorável, incluindo o morcego-de-franja-do-sul. O morcego-de-ferradura-pequeno é provável em ruínas e casas de pedra abandonadas.</div>
+  <div class="folio"><span>Fauna de Sicó</span><span>p. 3</span></div>
+</section>
+
+<!-- 4 · Aves da serra -->
+<section class="sheet">
+  <p class="eyebrow">Aves da serra e das escarpas</p>
+  <h2>Rapinas sobre o calcário</h2>
+  <div class="grid">
+    <article class="sp">
+      <img class="ill" style="object-fit: cover;" src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Uhu-3.jpg" alt="Foto de bufo-real">
+      <h3>Bufo-real</h3>
+      <p class="sci">Bubo bubo</p>
+      <div class="tags"><span class="tag ok">Confirmada</span><span class="tag">Quase ameaçada</span></div>
+      <div class="m" data-m="110000000111"></div>
+      <dl><dt>Onde</dt><dd>Nidifica nas ravinas do Vale dos Poios (Pombal). Antigos registos no Rio dos Mouros.</dd>
+      <dt>Como</dt><dd>Ao crepúsculo, ouça o "uh-hu" grave a centenas de metros. Pistas: egagrópilas de 7 a 10 cm sob rochas. Não use gravações para o chamar.</dd></dl>
+    </article>
+    <article class="sp">
+      <img class="ill" style="object-fit: cover;" src="https://upload.wikimedia.org/wikipedia/commons/5/52/Circaetus_gallicus_02.jpg" alt="Foto de águia-cobreira">
+      <h3>Águia-cobreira</h3>
+      <p class="sci">Circaetus gallicus</p>
+      <div class="tags"><span class="tag ok">Confirmada</span><span class="tag">Quase ameaçada</span></div>
+      <div class="m" data-m="001111111000"></div>
+      <dl><dt>Onde</dt><dd>Alto da Serra de Sicó (acesso por Vale), Moinho do Outeiro, canhão do Rio dos Mouros.</dd>
+      <dt>Como</dt><dd>Do meio da manhã ao meio da tarde. Ventre claro, cabeça escura, fica parada no ar à procura de cobras. Passa o inverno em África.</dd></dl>
+    </article>
+  </div>
+  <div class="mini">
+    <div><b>Peneireiro</b><span class="sci">Falco tinnunculus</span> · <span class="tag ok">Confirmada</span> <span class="tag">Vulnerável</span><br>Todo o ano. Peneira sobre prados e bermas à procura de gafanhotos e ratos.</div>
+    <div><b>Águia-de-asa-redonda</b><span class="sci">Buteo buteo</span> · <span class="tag ok">Confirmada</span><br>Todo o ano em postes e árvores isoladas. Miado agudo "piiiu", sobretudo de fevereiro a abril.</div>
+    <div><b>Melro-azul</b><span class="sci">Monticola solitarius</span> · <span class="tag prov">Provável</span><br>Fevereiro a junho, de manhã cedo. O macho azul-ardósia canta no alto dos rochedos das Buracas e dos Poios.</div>
+    <div><b>Andorinhão-real</b><span class="sci">Tachymarptis melba</span> · <span class="tag ok">Confirmada</span><br>Abril a setembro, bandos ruidosos junto às escarpas dos Poios, ao fim da tarde. Ventre branco.</div>
+    <div><b>Chasco-cinzento, trigueirão, perdiz</b><span class="tag ok">Confirmadas</span><br>Planalto de Sicó na primavera. O trigueirão soa a molho de chaves; a perdiz canta ao amanhecer.</div>
+    <div><b>Noitibós e mochos</b><span class="tag prov">Prováveis</span><br>Maio a agosto, na primeira hora de noite. O noitibó-cinzento "ronrona" em clareiras de mato.</div>
+  </div>
+  <div class="note">A <b>águia-de-Bonelli</b> e a <b>gralha-de-bico-vermelho</b> não estão confirmadas em Sicó. Um avistamento seria valioso: registe-o no eBird ou comunique ao ICNF, sem divulgar locais de ninho.</div>
+  <div class="folio"><span>Fauna de Sicó</span><span>p. 4</span></div>
+</section>
+
+<!-- 5 · Paul de Arzila -->
+<section class="sheet">
+  <p class="eyebrow">Reserva Natural do Paul de Arzila</p>
+  <h2>Garças, lontras e patos do caniçal</h2>
+  <p class="lede">O circuito de 1,5 a 2 km tem passadiço, observatórios e uma torre. O Centro de Interpretação abre nos dias úteis das 9h às 13h e das 14h às 17h30. Vale a pena em qualquer estação, e cada uma traz espécies diferentes.</p>
+  <div class="grid">
+    <article class="sp">
+      <img class="ill" style="object-fit: cover;" src="https://upload.wikimedia.org/wikipedia/commons/4/43/Purple_heron_%28Ardea_purpurea%29_by_Shantanu_Kuveskar.jpg" alt="Foto de garça-vermelha">
+      <h3>Garça-vermelha</h3>
+      <p class="sci">Ardea purpurea</p>
+      <div class="tags"><span class="tag ok">Confirmada</span><span class="tag">Vulnerável</span><span class="tag">Símbolo do paul</span></div>
+      <div class="m" data-m="001111111000"></div>
+      <dl><dt>Onde</dt><dd>Torre e passadiço. Na primavera vê-se até da varanda do Centro.</dd>
+      <dt>Como</dt><dd>Amanhecer e fim de tarde, voo lento com o pescoço em "S". Pico em abril e maio, quando leva material para o ninho.</dd></dl>
+    </article>
+    <article class="sp">
+      <img class="ill" style="object-fit: cover;" src="https://museubiodiversidade.uevora.pt/wp-content/uploads/2019/11/1905_Ll-I.jpg" alt="Foto de lontra">
+      <h3>Lontra</h3>
+      <p class="sci">Lutra lutra</p>
+      <div class="tags"><span class="tag ok">Confirmada</span><span class="tag">Reproduz-se no paul</span></div>
+      <div class="m" data-m="110000000111"></div>
+      <dl><dt>Onde</dt><dd>Valas do Moinho, do Meio e da Costa; ponte de madeira.</dd>
+      <dt>Como</dt><dd>Mais fácil pelas pistas: dejetos escuros com escamas em pedras e troncos, e pegadas de cinco dedos no lodo. Ao amanhecer, em silêncio, da torre.</dd></dl>
+    </article>
+  </div>
+  <div class="mini">
+    <div><b>Garçote</b><span class="sci">Ixobrychus minutus</span> · <span class="tag ok">Confirmada</span> <span class="tag">Vulnerável</span><br>Abril a setembro. A garça mais pequena da Europa, em voos curtos sobre o caniço.</div>
+    <div><b>Goraz</b><span class="sci">Nycticorax nycticorax</span> · <span class="tag ok">Confirmada</span><br>Sai dos salgueirais ao pôr do sol com um grasnido rouco "kuak".</div>
+    <div><b>Águia-sapeira</b><span class="sci">Circus aeruginosus</span> · <span class="tag ok">Confirmada</span><br>Todo o ano. Plana baixo com as asas em "V" aberto. Melhor de manhã, da torre.</div>
+    <div><b>Guarda-rios</b><span class="sci">Alcedo atthis</span> · <span class="tag ok">Confirmada</span><br>Todo o ano, mais visível no outono. Silvo agudo em voo rasante junto à ponte.</div>
+    <div><b>Patos invernantes</b><span class="tag ok">Confirmados</span><br>Novembro a fevereiro. A marrequinha chega a 3,6% do total do país.</div>
+    <div><b>Rouxinóis-dos-caniços</b><span class="tag ok">Confirmados</span><br>Abril a julho, cantos rangentes ao amanhecer. No outono passam felosas e o pisco-de-peito-azul.</div>
+  </div>
+  <div class="folio"><span>Fauna de Sicó</span><span>p. 5</span></div>
+</section>
+
+<!-- 6 · Mamíferos terrestres -->
+<section class="sheet">
+  <p class="eyebrow">Mamíferos da serra</p>
+  <h2>Pistas mais do que avistamentos</h2>
+  <p class="lede">Não há uma lista publicada dos mamíferos terrestres de Sicó. O javali está confirmado; os outros são prováveis. Quase todos são noturnos, por isso o melhor é aprender a ler os sinais que deixam.</p>
+  <div class="grid">
+    <article class="sp">
+      <img class="ill" style="object-fit: cover;" src="https://upload.wikimedia.org/wikipedia/commons/d/d2/Wildschwein%2C_N%C3%A4he_Pulverstampftor_%28cropped%29.jpg" alt="Foto de javali">
+      <h3>Javali</h3>
+      <p class="sci">Sus scrofa</p>
+      <div class="tags"><span class="tag ok">Confirmada</span></div>
+      <div class="m" data-m="111111111111"></div>
+      <dl><dt>Onde</dt><dd>Olivais abandonados da serra e arredores de Arzila.</dd>
+      <dt>Como</dt><dd>Terra revolvida em prados, banhos de lama com troncos esfregados, pegadas de casco fendido. Afaste-se de fêmeas com crias listradas.</dd></dl>
+    </article>
+    <article class="sp">
+      <img class="ill" style="object-fit: cover;" src="https://upload.wikimedia.org/wikipedia/commons/6/63/Genetta_genetta_felina_%28Wroclaw_zoo%29.JPG" alt="Foto de geneta">
+      <h3>Geneta</h3>
+      <p class="sci">Genetta genetta</p>
+      <div class="tags"><span class="tag prov">Provável</span></div>
+      <div class="m" data-m="111111111111"></div>
+      <dl><dt>Onde</dt><dd>Escarpas, lapiás e carvalhais: Buracas do Casmilo, Rio dos Mouros.</dd>
+      <dt>Como</dt><dd>Noturna. Procure latrinas: dejetos acumulados em rochas e plataformas altas.</dd></dl>
+    </article>
+  </div>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Espécie</th><th>Quando</th><th>Pistas</th></tr></thead>
+      <tbody>
+        <tr><td>Raposa</td><td>Todo o ano, amanhecer e anoitecer</td><td>Dejetos retorcidos em pedras e cruzamentos; ladridos roucos de dezembro a fevereiro</td></tr>
+        <tr><td>Texugo</td><td>Fevereiro a novembro, de noite</td><td>Tocas com grandes montes de terra, trilhos batidos, latrinas em covas</td></tr>
+        <tr><td>Saca-rabos</td><td>De dia, a meio da manhã</td><td>Atravessa caminhos, por vezes em fila; pegadas alongadas</td></tr>
+        <tr><td>Coelho-bravo</td><td>Amanhecer e entardecer</td><td>Latrinas de bolinhas, tocas; está classificado como Vulnerável</td></tr>
+        <tr><td>Ouriço-cacheiro</td><td>Noites quentes, março a outubro</td><td>Dejetos negros e brilhantes com restos de insetos; bufidos nas hortas</td></tr>
+        <tr><td>Fuinha</td><td>De noite</td><td>Dejetos com sementes de fruta sobre muros e telhados das aldeias</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note green">O <b>gato-bravo</b> (Em perigo) é referido para o Paul de Arzila, mas confunde-se com gatos domésticos assilvestrados. Só armadilhagem fotográfica e genética o confirmam.</div>
+  <div class="folio"><span>Fauna de Sicó</span><span>p. 6</span></div>
+</section>
+
+<!-- 7 · Anfíbios e répteis -->
+<section class="sheet">
+  <p class="eyebrow">Anfíbios e répteis</p>
+  <h2>Tritões nas grutas, lagartos nos lapiás</h2>
+  <p class="lede">Os anfíbios saem nas noites de chuva do outono ao fim do inverno. Os répteis aquecem-se em manhãs de sol, da primavera ao verão. Fotografe sem tocar.</p>
+  <div class="grid">
+    <article class="sp">
+      <img class="ill" style="object-fit: cover;" src="https://biodiversidade.com.pt/wp-content/uploads/2022/12/Header-tritao-1024x531.jpg" alt="Foto de tritão-marmorado">
+      <h3>Tritão-marmorado</h3>
+      <p class="sci">Triturus marmoratus</p>
+      <div class="tags"><span class="tag ok">Confirmada</span><span class="tag">Também em grutas</span></div>
+      <div class="m" data-m="111110000000"></div>
+      <dl><dt>Onde</dt><dd>Charcos, tanques de pedra e bebedouros das aldeias do calcário.</dd>
+      <dt>Como</dt><dd>À noite, com lanterna, na fase aquática. Os machos ganham crista alta.</dd></dl>
+    </article>
+    <article class="sp">
+      <svg class="ill" viewBox="0 0 200 140" role="img" aria-label="Ilustração de salamandra-de-pintas-amarelas"><use href="#i-sal"/></svg>
+      <h3>Salamandra-de-pintas-amarelas</h3>
+      <p class="sci">Salamandra salamandra</p>
+      <div class="tags"><span class="tag prov">Provável</span></div>
+      <div class="m" data-m="111000000111"></div>
+      <dl><dt>Onde</dt><dd>Carvalhais húmidos, muros e Vale do Rio dos Mouros.</dd>
+      <dt>Como</dt><dd>Noites de chuva. As larvas nascem em fontes e regatos.</dd></dl>
+    </article>
+    <article class="sp">
+      <img class="ill" style="object-fit: cover;" src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Jewelled_Lizard_%28Timon_lepidus%29_male_found_under_a_stone_by_Jean_NICOLAS_%2814166347788%29.jpg" alt="Foto de sardão">
+      <h3>Sardão</h3>
+      <p class="sci">Timon lepidus</p>
+      <div class="tags"><span class="tag prov">Provável</span></div>
+      <div class="m" data-m="000111111000"></div>
+      <dl><dt>Onde</dt><dd>Muros de pedra seca e lapiás: Buracas do Casmilo, planalto de Sicó.</dd>
+      <dt>Como</dt><dd>Manhãs soalheiras. Os machos têm manchas azuis nos flancos.</dd></dl>
+    </article>
+    <article class="sp">
+      <svg class="ill" viewBox="0 0 200 140" style="--lzb:#5E8C3E;--lzh:var(--sky);--ocop:0" role="img" aria-label="Ilustração de lagarto-de-água macho de cabeça azul"><use href="#i-lizard"/></svg>
+      <h3>Lagarto-de-água</h3>
+      <p class="sci">Lacerta schreiberi</p>
+      <div class="tags"><span class="tag ok">Confirmada em Arzila</span><span class="tag">Endemismo ibérico</span></div>
+      <div class="m" data-m="000111000000"></div>
+      <dl><dt>Onde</dt><dd>Margens das valas e ribeiras com amieiros.</dd>
+      <dt>Como</dt><dd>Manhãs de sol; os machos têm a cabeça azul-intensa. Aproxime-se devagar.</dd></dl>
+    </article>
+    <article class="sp wide">
+      <img class="ill" style="object-fit: cover;" src="https://museubiodiversidade.uevora.pt/wp-content/uploads/2019/11/3506_Vl-I.jpg" alt="Foto de víbora-cornuda">
+      <div class="stack" style="gap:6px">
+        <h3>Víbora-cornuda</h3>
+        <p class="sci">Vipera latastei</p>
+        <div class="tags"><span class="tag prov">Provável</span><span class="tag no">Venenosa</span></div>
+      </div>
+      <div class="stack" style="gap:8px">
+        <div class="m" data-m="000111000000"></div>
+        <dl><dt>Onde</dt><dd>Encostas calcárias pedregosas com mato.</dd>
+        <dt>Como</dt><dd>Manhãs amenas. Pequeno "corno" no focinho e ziguezague no dorso. Nunca manusear.</dd></dl>
+      </div>
+    </article>
+  </div>
+  <div class="mini">
+    <div><b>Sapo-comum</b><span class="tag ok">Confirmada</span><br>Atravessa estradas nas primeiras noites de chuva. Conduza devagar perto de Arzila.</div>
+    <div><b>Rela e rã-verde</b><span class="tag prov">Prováveis</span><br>Coro estridente nos caniçais de março a maio; a rã-verde mergulha de dia nas valas.</div>
+    <div><b>Sapo-parteiro</b><span class="tag prov">Provável</span><br>Um "piu" de sino em muros de pedra seca, da primavera ao verão.</div>
+    <div><b>Cágado-mediterrânico</b><span class="tag prov">Provável</span><br>Ao sol em troncos e margens de valas; mergulha quando nos vê.</div>
+  </div>
+  <div class="folio"><span>Fauna de Sicó</span><span>p. 7</span></div>
+</section>
+
+<!-- 8 · Rios, grutas e insetos -->
+<section class="sheet">
+  <p class="eyebrow">Rios, grutas e prados</p>
+  <h2>A fauna escondida</h2>
+  <div class="grid">
+    <article class="sp">
+      <svg class="ill" viewBox="0 0 200 140" role="img" aria-label="Ilustração de lampreia-de-riacho"><use href="#i-lamprey"/></svg>
+      <h3>Lampreia-de-riacho</h3>
+      <p class="sci">Lampetra planeri</p>
+      <div class="tags"><span class="tag ok">Confirmada no Nabão</span></div>
+      <div class="m" data-m="011110000000"></div>
+      <dl><dt>Onde</dt><dd>Rio Nabão e afluentes; no norte de Sicó não está confirmada.</dd>
+      <dt>Como</dt><dd>Passa anos como larva no lodo. Os adultos aparecem pouco tempo, a cavar ninhos no cascalho. Não remexa os leitos.</dd></dl>
+    </article>
+    <article class="sp">
+      <svg class="ill" viewBox="0 0 200 140" role="img" aria-label="Ilustração de boga"><use href="#i-fish"/></svg>
+      <h3>Boga e barbo</h3>
+      <p class="sci">Pseudochondrostoma polylepis · Barbus bocagei</p>
+      <div class="tags"><span class="tag ok">Confirmados</span><span class="tag">Endémicos</span></div>
+      <div class="m" data-m="000001111000"></div>
+      <dl><dt>Onde</dt><dd>Rios Arunca e Anços, valas de Arzila, ponte junto a Conímbriga.</dd>
+      <dt>Como</dt><dd>De pontes, em dias de sol e água baixa; óculos polarizados ajudam. As bogas sobem os rios para desovar de março a maio.</dd></dl>
+    </article>
+    <article class="sp">
+      <svg class="ill" viewBox="0 0 200 140" role="img" aria-label="Ilustração do escaravelho cego Iberoporus pluto"><use href="#i-beetle"/></svg>
+      <h3>Iberoporus pluto</h3>
+      <p class="sci">Escaravelho de água subterrânea · 2,8 mm</p>
+      <div class="tags"><span class="tag ok">Só existe em Sicó</span></div>
+      <dl><dt>Onde</dt><dd>Gruta do Soprador do Carvalho, Penela. Conhecido de uma única fêmea.</dd>
+      <dt>Como</dt><dd>Não se procura. É cego, despigmentado e vive num charco de argila. Protege-se mantendo limpa a água do Dueça.</dd></dl>
+    </article>
+    <article class="sp">
+      <svg class="ill" viewBox="0 0 200 140" role="img" aria-label="Ilustração da borboleta Euphydryas aurinia"><use href="#i-bfly"/></svg>
+      <h3>Borboleta-doninha</h3>
+      <p class="sci">Euphydryas aurinia</p>
+      <div class="tags"><span class="tag prov">Provável</span><span class="tag">Diretiva Habitats</span></div>
+      <div class="m" data-m="000110000000"></div>
+      <dl><dt>Onde</dt><dd>Prados calcários floridos e matos abertos.</dd>
+      <dt>Como</dt><dd>Voa nas horas de sol. No fim do verão as lagartas fazem ninhos de seda em madressilva.</dd></dl>
+    </article>
+  </div>
+  <div class="note green">Do carso de Sicó estão descritas pelo menos <b>cinco espécies que não existem em mais lado nenhum</b>: o escaravelho <i>Iberoporus pluto</i>, o estafilinídeo <i>Domene lusitanica</i>, os pseudoscorpiões <i>Roncocreagris borgesi</i> e <i>R. gepesi</i> e o bicho-de-conta <i>Trichoniscoides sicoensis</i>. Vivem em grutas de Penela e Ansião ameaçadas por pisoteio, esgotos e pó de pedreira.</div>
+  <div class="mini">
+    <div><b>Vaca-loura</b><span class="tag prov">Provável</span><br>Junho e julho, ao crepúsculo, junto a carvalhos-cerquinhos velhos.</div>
+    <div><b>Polinizadores das orquídeas</b><span class="tag prov">Prováveis</span><br>Março a maio nos prados calcários. Observe sem pisar as orquídeas.</div>
+  </div>
+  <div class="folio"><span>Fauna de Sicó</span><span>p. 8</span></div>
+</section>
+
+<!-- 9 · Calendário -->
+<section class="sheet">
+  <p class="eyebrow">Ano de campo</p>
+  <h2>O que ver em cada mês</h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Mês</th><th>Destaques</th><th>Onde ir</th></tr></thead>
+      <tbody>
+        <tr><td>Janeiro</td><td>Bufo-real a cantar; patos invernantes; tritões entram na água</td><td>Arzila, cascata do Rio dos Mouros</td></tr>
+        <tr><td>Fevereiro</td><td>Pico da migração de sapos; cotovia-pequena e melro-azul começam a cantar</td><td>Charcos do planalto à noite, Arzila</td></tr>
+        <tr><td>Março</td><td>Chegam a águia-cobreira, o milhafre-preto e a garça-vermelha; primeiros morcegos</td><td>Serra de Sicó, Arzila</td></tr>
+        <tr><td>Abril</td><td>Garçote, chasco, rouxinóis-dos-caniços; lagarto-de-água; borboletas</td><td>Arzila cedo, Buracas do Casmilo</td></tr>
+        <tr><td>Maio</td><td>Pico geral: todas as aves estivais a cantar; répteis; noitibós</td><td>Todos os locais, longe das escarpas</td></tr>
+        <tr><td>Junho</td><td>Crias de garças e rapinas; morcegos com crias; vaca-loura</td><td>Arzila, Rio dos Mouros ao entardecer</td></tr>
+        <tr><td>Julho</td><td>Juvenis em voo; peixes visíveis em água baixa</td><td>Pontes dos rios, saídas noturnas</td></tr>
+        <tr><td>Agosto</td><td>Começa a passagem de aves; cobras ao crepúsculo</td><td>Arzila, pontes do Anços e Dueça</td></tr>
+        <tr><td>Setembro</td><td>Passagem outonal de passeriformes em Arzila; partem cobreira e andorinhão-real</td><td>Arzila</td></tr>
+        <tr><td>Outubro</td><td>Bufo-real retoma o canto; salamandras com as chuvas; chegam os patos</td><td>Buracas do Casmilo, canhões</td></tr>
+        <tr><td>Novembro</td><td>Morcegos entram em hibernação; guarda-rios bem visível</td><td>Arzila, passadiços do Rio dos Mouros</td></tr>
+        <tr><td>Dezembro</td><td>Raposa em cio; bufo-real inicia a nidificação</td><td>Arzila, escuta noturna nos canhões</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="folio"><span>Fauna de Sicó</span><span>p. 9</span></div>
+</section>
+
+<!-- 10 · Regras e fontes -->
+<section class="sheet">
+  <p class="eyebrow">No terreno</p>
+  <h2>Ver sem perturbar</h2>
+  <ol class="rules">
+    <li><div><b>Não entre em grutas.</b> O plano de gestão de 2026 proíbe o acesso a grutas com colónias de morcegos, como o Algar da Água e a Gruta do Bacelinho. À entrada não se sabe o que lá vive, por isso a regra é não entrar sem autorização e guia.</div></li>
+    <li><div><b>Evite as escarpas de janeiro a julho.</b> Nos Poios, nas Buracas e no Rio dos Mouros a escalada perturba o bufo-real e o andorinhão-real a nidificar.</div></li>
+    <li><div><b>Guarde distância dos ninhos.</b> Use binóculos. Se a ave se agitar, afaste-se. Não use gravações de cantos na primavera nem publique locais de ninho.</div></li>
+    <li><div><b>Não manuseie anfíbios nem répteis.</b> A pele dos anfíbios absorve cremes e transmite doenças. Volte a pôr cada pedra no sítio.</div></li>
+    <li><div><b>Fique nos trilhos.</b> Em Arzila, sem ruído, sem lume e sem colher plantas. Verifique o risco de incêndio antes de sair.</div></li>
+    <li><div><b>Registe o que vê.</b> Muitas espécies de Sicó estão por confirmar. Uma observação com data, local aproximado e foto, enviada para o eBird, o iNaturalist ou o ICNF, ajuda a completar o inventário.</div></li>
+  </ol>
+  <h3 style="margin-top:30px">Fontes principais</h3>
+  <ul class="src">
+    <li><a href="https://www.ccdr-lvt.pt/wp-content/uploads/2022/03/EER_sitio-sico_alvaiazere.pdf">CCDR-LVT, ficha do sítio Sicó/Alvaiázere</a></li>
+    <li><a href="https://www.icnf.pt/api/file/doc/8a4fe445b0253677">ICNF, Reserva Natural do Paul de Arzila</a></li>
+    <li><a href="https://www.esac.pt/wp-content/uploads/2024/06/PropostaPlanoCogestao_2024_2026_edital.pdf">Plano de Cogestão do Paul de Arzila 2024–2026</a></li>
+    <li><a href="https://oalvaiazerense.com.pt/noticias/quase-metade-do-concelho-de-alvaiazere-com-regras-ambientais-mais-apertadas/">O Alvaiazerense, regras do plano de gestão de 2026</a></li>
+    <li><a href="https://core.ac.uk/download/491365279.pdf">Reboleira e Eusébio (2021), fauna cavernícola de Sicó</a></li>
+    <li><a href="https://www.avesdeportugal.info/sitsico/">Aves de Portugal, Serra de Sicó</a> e <a href="https://www.avesdeportugal.info/sitarzila/">Paul de Arzila</a></li>
+    <li><a href="https://www.listavermelhadasaves.pt/lista-vermelha/">Lista Vermelha das Aves de Portugal 2022</a></li>
+    <li><a href="https://www.portugalnummapa.com/rota-dos-poios/">Rota dos Poios</a></li>
+    <li><a href="https://cm-condeixa.pt/turismo/natureza/">Câmara Municipal de Condeixa-a-Nova, natureza</a></li>
+    <li><a href="https://siaia.apambiente.pt/AIADOC/PA286/fr_rm_quirop_201703_pa_pealvaiazere2019510132738.pdf">APA, monitorização de morcegos em Alvaiázere</a></li>
+  </ul>
+  <div class="folio"><span>Fauna de Sicó · ilustrações originais, não são retratos fiéis</span><span>p. 10</span></div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var L=["J","F","M","A","M","J","J","A","S","O","N","D"];
+  var N=["janeiro","fevereiro","março","abril","maio","junho","julho","agosto","setembro","outubro","novembro","dezembro"];
+  document.querySelectorAll(".m[data-m]").forEach(function(el){
+    var s=el.getAttribute("data-m"), on=[];
+    for(var i=0;i<12;i++){
+      var c=document.createElement("span"); c.textContent=L[i];
+      if(s.charAt(i)==="1"){c.className="on"; on.push(N[i]);}
+      c.setAttribute("aria-hidden","true"); el.appendChild(c);
+    }
+    if(!el.hasAttribute("aria-label")) el.setAttribute("aria-label","Melhor época: "+on.join(", "));
+    el.setAttribute("role","img");
+  });
+})();
+</script>
+
+</body></html>
