@@ -24,6 +24,7 @@ collections:
 
 # Língua, modelo e endereço de cada ficheiro são deduzidos da pasta onde está.
 # Ex.: faunaeflora/_especies/pt/bubo-bubo.md  ->  /faunaeflora/pt/especies/bubo-bubo/
+# (Só funciona para coleções; as páginas em faunaeflora/pt e /en indicam lang e layout no cabeçalho.)
 defaults:
   - scope: { path: "faunaeflora/_zonas/pt" }
     values: { lang: pt, layout: zona, permalink: "/faunaeflora/pt/zonas/:name/" }
@@ -37,10 +38,6 @@ defaults:
     values: { lang: pt, layout: guia, permalink: "/faunaeflora/pt/guias/:name/" }
   - scope: { path: "faunaeflora/_guias/en" }
     values: { lang: en, layout: guia, permalink: "/faunaeflora/en/guides/:name/" }
-  - scope: { path: "faunaeflora/pt" }
-    values: { lang: pt, layout: base }
-  - scope: { path: "faunaeflora/en" }
-    values: { lang: en, layout: base }
 
 exclude:
   - faunaeflora/README.md

@@ -1,0 +1,155 @@
+---
+title: Serra de Sicó and Paul de Arzila
+region: Condeixa · Penela · Ansião · Alvaiázere · Pombal
+summary: A limestone karst with over 300 caves, raptors on the cliffs and bats of national importance, and 20 km away a reedbed marsh full of herons, otters and ducks.
+calendar:
+  - what: Eagle-owls calling; wintering ducks; newts return to the water
+    where: Arzila, Rio dos Mouros waterfall
+  - what: Peak toad migration; woodlark and blue rock thrush start singing
+    where: Plateau ponds at night, Arzila
+  - what: Short-toed eagle, black kite and purple heron arrive; first bats
+    where: Serra de Sicó, Arzila
+  - what: Little bittern, wheatear, reed warblers; Schreiber's green lizard; butterflies and orchids
+    where: Arzila early, Buracas do Casmilo
+  - what: "Overall peak: every summer visitor singing; reptiles; nightjars"
+    where: Everywhere, keeping away from the cliffs
+  - what: Young herons and raptors; bats with young; stag beetle
+    where: Arzila, Rio dos Mouros at dusk
+  - what: Fledglings on the wing; fish visible in low water
+    where: River bridges, night walks
+  - what: Bird passage begins; snakes at dusk
+    where: Arzila, Anços and Dueça bridges
+  - what: Autumn passage of songbirds at Arzila; short-toed eagle and alpine swift leave
+    where: Arzila
+  - what: Eagle-owl calls again; salamanders with the rains; ducks arrive
+    where: Buracas do Casmilo, gorges
+  - what: Bats go into hibernation; kingfisher easy to see
+    where: Arzila, Rio dos Mouros boardwalks
+  - what: Foxes mating; eagle-owl starts nesting
+    where: Arzila, night listening in the gorges
+rules:
+  - title: Do not enter caves.
+    text: "The 2026 management plan bans access to caves holding bat colonies, such as Algar da Água and Gruta do Bacelinho. From the entrance you can’t tell what lives inside, so the rule is: no entry without permission and a guide."
+  - title: Avoid the cliffs from January to July.
+    text: At Poios, Buracas and Rio dos Mouros, climbing disturbs nesting eagle-owls and alpine swifts.
+  - title: Keep your distance from nests.
+    text: Use binoculars. If a bird becomes agitated, move away. Don't play recorded calls in spring or publish nest sites.
+  - title: Don't handle amphibians or reptiles.
+    text: Amphibian skin absorbs creams and spreads disease. Put every stone back where you found it.
+  - title: Stay on the trails.
+    text: At Arzila, no noise, no fires and no picking plants. Never dig up orchids. Check the fire risk before you set out.
+  - title: Record what you see.
+    text: Many of Sicó's species are still unconfirmed. A sighting with date, approximate location and a photo, sent to eBird, iNaturalist or ICNF, helps complete the inventory.
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<section class="sheet cover" aria-label="Cover">
+  {% include sico-capa.html label="Limestone cliffs at dusk, with an eagle-owl perched and bats in flight" %}
+  <div class="titles">
+    <p class="crumbs"><a href="{{ '/faunaeflora/en/' | relative_url }}">{{ t.home }}</a> / <a href="{{ '/faunaeflora/en/zones/' | relative_url }}">{{ t.zones }}</a></p>
+    <p class="eyebrow">Field notebook</p>
+    <h1>Sicó</h1>
+    <p class="sub">{{ page.region }}</p>
+    <p class="intro">A short guide to recognising the region's animals and plants and knowing when and where to look for them.</p>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Before you go</p>
+  <h2>Two worlds 20 km apart</h2>
+  <p class="lede">The <b>Sicó karst</b> is limestone: pavements, gorges, Portuguese oak woods and over 300 caves. It is protected mainly for its bats and for animals found only in its caves. <b>Paul de Arzila</b>, partly in the parish of Anobra, is a reedbed marsh with 181 vertebrate species and the most reliable place to see wildlife.</p>
+  <div class="two">
+    {% include sico-mapa.html label="Sketch of viewing sites between Coimbra and Alvaiázere" massif="SICÓ MASSIF" river="Mondego river" note="Approximate sketch, not to scale · N ↑" %}
+    <div class="legend">
+      {%- for e in t.evidence_labels %}
+      <div class="row">{% assign ek = e[0] %}{% include tag-presenca.html e=ek %}<span>{{ t.evidence_help[e[0]] }}</span></div>
+      {%- endfor %}
+      <div class="stack" style="gap:6px">
+        {% include meses.html m="001111000000" %}
+        <span>The month bar marks the <b>best season</b> to look for each species.</span>
+      </div>
+      <p style="color:var(--muted);font-size:14px">Timing and field-sign tips follow the general natural history of the Iberian Peninsula where there is no specific local record.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Flying mammals</p>
+  <h2>The cave bats</h2>
+  <p class="lede">They are the main reason Sicó is protected. The massif's caves hold roosts of national importance for three cave-dwelling species. Since 2026 it is <b>forbidden to enter</b> caves with colonies, so watch them outside, at dusk.</p>
+  {% include especies.html zona="sico" grupo="morcegos" %}
+  <div class="note">Twelve bat species of unfavourable conservation status have been recorded around the Alvaiázere wind farm, including Escalera's bat. The lesser horseshoe bat is likely in ruins and abandoned stone houses.</div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Birds of the hills and cliffs</p>
+  <h2>Raptors over the limestone</h2>
+  {% include especies.html zona="sico" slugs="bubo-bubo circaetus-gallicus falco-tinnunculus buteo-buteo monticola-solitarius tachymarptis-melba" %}
+  <div class="mini">
+    <div><b>Northern wheatear, corn bunting, red-legged partridge</b><span class="tag ok">Confirmed</span><br>Sicó plateau in spring. The corn bunting sounds like a jangling bunch of keys; the partridge calls at dawn.</div>
+    <div><b>Nightjars and owls</b><span class="tag prov">Probable</span><br>May to August, in the first hour of darkness. The European nightjar "churrs" in scrubby clearings.</div>
+  </div>
+  <div class="note"><b>Bonelli's eagle</b> and <b>red-billed chough</b> are not confirmed in Sicó. A sighting would be valuable: log it on eBird or report it to ICNF, without revealing nest sites.</div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Paul de Arzila Nature Reserve</p>
+  <h2>Herons, otters and reedbed ducks</h2>
+  <p class="lede">The 1.5–2 km circuit has a boardwalk, hides and a tower. The visitor centre opens on weekdays 9:00–13:00 and 14:00–17:30. Worth a visit in any season, each bringing different species.</p>
+  {% include especies.html zona="sico" slugs="ardea-purpurea ixobrychus-minutus nycticorax-nycticorax circus-aeruginosus alcedo-atthis lutra-lutra" %}
+  <div class="mini">
+    <div><b>Wintering ducks</b><span class="tag ok">Confirmed</span><br>November to February. Teal here reach 3.6% of Portugal's total.</div>
+    <div><b>Reed warblers</b><span class="tag ok">Confirmed</span><br>April to July, grating songs at dawn. In autumn, migrant warblers and bluethroats pass through.</div>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Mammals of the hills</p>
+  <h2>More signs than sightings</h2>
+  <p class="lede">There is no published list of Sicó's land mammals. Wild boar is confirmed; the rest are probable. Almost all are nocturnal, so the best approach is learning to read the signs they leave.</p>
+  {% include especies.html zona="sico" slugs="sus-scrofa genetta-genetta" %}
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Species</th><th>When</th><th>Signs</th></tr></thead>
+      <tbody>
+        <tr><td>Red fox</td><td>All year, dawn and dusk</td><td>Twisted droppings on stones and at path junctions; hoarse barks from December to February</td></tr>
+        <tr><td>Badger</td><td>February to November, at night</td><td>Setts with big spoil heaps, well-worn paths, latrines in shallow pits</td></tr>
+        <tr><td>Egyptian mongoose</td><td>By day, mid-morning</td><td>Crosses tracks, sometimes in single file; elongated footprints</td></tr>
+        <tr><td>European rabbit</td><td>Dawn and dusk</td><td>Latrines of round pellets, burrows; classed as Vulnerable</td></tr>
+        <tr><td>Hedgehog</td><td>Warm nights, March to October</td><td>Shiny black droppings with insect remains; snuffling in vegetable gardens</td></tr>
+        <tr><td>Stone marten</td><td>At night</td><td>Droppings full of fruit seeds on walls and village rooftops</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note green">The <b>wildcat</b> (Endangered) is reported from Paul de Arzila, but it is easily confused with feral domestic cats. Only camera trapping and genetics can confirm it.</div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Amphibians and reptiles</p>
+  <h2>Newts in caves, lizards on the limestone</h2>
+  <p class="lede">Amphibians come out on rainy nights from autumn to late winter. Reptiles bask on sunny mornings from spring to summer. Photograph without touching.</p>
+  {% include especies.html zona="sico" slugs="triturus-marmoratus salamandra-salamandra timon-lepidus lacerta-schreiberi vipera-latastei" %}
+  <div class="mini">
+    <div><b>Common toad</b><span class="tag ok">Confirmed</span><br>Crosses roads on the first rainy nights. Drive slowly near Arzila.</div>
+    <div><b>Tree frog and Iberian water frog</b><span class="tag prov">Probable</span><br>A shrill chorus in the reeds from March to May; water frogs dive into the channels by day.</div>
+    <div><b>Midwife toad</b><span class="tag prov">Probable</span><br>A bell-like "peep" from dry-stone walls, spring to summer.</div>
+    <div><b>Mediterranean pond turtle</b><span class="tag prov">Probable</span><br>Basks on logs and channel banks; dives when it sees you.</div>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Rivers, caves and meadows</p>
+  <h2>The hidden fauna</h2>
+  {% include especies.html zona="sico" slugs="lampetra-planeri pseudochondrostoma-polylepis luciobarbus-bocagei iberoporus-pluto euphydryas-aurinia" %}
+  <div class="note green">At least <b>five species found nowhere else on Earth</b> have been described from the Sicó karst: the beetle <i>Iberoporus pluto</i>, the rove beetle <i>Domene lusitanica</i>, the pseudoscorpions <i>Roncocreagris borgesi</i> and <i>R. gepesi</i>, and the woodlouse <i>Trichoniscoides sicoensis</i>. They live in caves around Penela and Ansião threatened by trampling, sewage and quarry dust.</div>
+  <div class="mini">
+    <div><b>Stag beetle</b><span class="tag prov">Probable</span><br>June and July at dusk, near old Portuguese oaks.</div>
+    <div><b>Orchid pollinators</b><span class="tag prov">Probable</span><br>March to May in the limestone meadows. Watch without trampling the orchids.</div>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Flora</p>
+  <h2>Oak woods and limestone meadows</h2>
+  <p class="lede">Sicó's landscape is made of Portuguese oak woods, low scrub on limestone and dry meadows that fill with flowers and orchids in spring. This section is still being completed.</p>
+  {% include especies.html zona="sico" grupo="plantas" %}
+</section>

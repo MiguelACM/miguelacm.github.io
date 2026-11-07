@@ -1,0 +1,29 @@
+{%- comment -%}
+Grelha de cartões de espécies, na língua da página.
+Parâmetros (todos opcionais):
+  zona   = só espécies presentes nesta zona (e mostra a presença e o "onde")
+  grupo  = só deste grupo (id em grupos.yml)
+  slugs  = lista separada por espaços, por esta ordem
+  hidden = cartões escondidos (para filtrar com JavaScript)
+{%- endcomment -%}
+{%- assign docs = site.especies | where: "lang", page.lang -%}
+{%- assign wanted = nil -%}
+{%- if include.slugs -%}{%- assign wanted = include.slugs | split: " " -%}{%- endif -%}
+<div class="cards">
+{%- if wanted -%}
+{%- for s in wanted -%}
+{%- assign doc = docs | where: "slug", s | first -%}
+{%- if doc -%}{% include card-especie.html doc=doc zona=include.zona hidden=include.hidden %}{%- endif -%}
+{%- endfor -%}
+{%- else -%}
+{%- for g in site.data.grupos -%}
+{%- if include.grupo and g.id != include.grupo -%}{%- continue -%}{%- endif -%}
+{%- for doc in docs -%}
+{%- assign d = site.data.especies[doc.slug] -%}
+{%- if d.group != g.id -%}{%- continue -%}{%- endif -%}
+{%- if include.zona -%}{%- unless d.zones[include.zona] -%}{%- continue -%}{%- endunless -%}{%- endif -%}
+{% include card-especie.html doc=doc zona=include.zona hidden=include.hidden %}
+{%- endfor -%}
+{%- endfor -%}
+{%- endif -%}
+</div>

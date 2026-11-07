@@ -1,0 +1,38 @@
+---
+ref: home
+leaflet: true
+summary: Guia de campo da fauna e flora de Portugal, por zonas. O que procurar, onde e quando, com destaque para o birdwatching.
+lang: pt
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<section class="sheet">
+  <p class="eyebrow">Caderno de campo</p>
+  <h1 class="title">Fauna e Flora de Portugal</h1>
+  <p class="lede">Um guia para reconhecer os animais e as plantas de cada região do país e saber quando e onde os procurar. Cada ficha diz se a espécie está <b>confirmada</b> em fontes locais ou se é apenas <b>provável</b>, mostra os meses bons para a ver e as pistas que deixa no terreno.</p>
+  <p class="lede" style="color:var(--muted)">Começamos pela Serra de Sicó e pelo Paul de Arzila. Outras zonas virão a seguir.</p>
+</section>
+
+<section class="sheet" id="zonas">
+  <p class="eyebrow">{{ t.zones }}</p>
+  <h2>Onde ir</h2>
+  <div id="zone-map" class="lmap" role="region" aria-label="Mapa das zonas"></div>
+  <script type="application/json" id="zone-data">[{% assign zdocs = site.zonas | where: "lang", page.lang %}{% for z in zdocs %}{"name":{{ z.title | jsonify }},"url":{{ z.url | relative_url | jsonify }},"c":{{ site.data.zonas[z.slug].center | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
+  {% include zonas.html %}
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">{{ t.this_month }}</p>
+  <h2>Em boa época em <span id="now-month" data-months="{{ t.months | join: '|' }}">…</span></h2>
+  <p class="lede">{{ t.this_month_lede }}</p>
+  <div id="now" data-max="8">{% include especies.html hidden=true %}</div>
+  <noscript><p><a href="{{ '/faunaeflora/pt/especies/' | relative_url }}">{{ t.all_species }}</a></p></noscript>
+  <p style="margin-top:18px"><a class="btn" href="{{ '/faunaeflora/pt/especies/' | relative_url }}">{{ t.all_species }} →</a></p>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">{{ t.birdwatching }}</p>
+  <h2>Observar aves</h2>
+  <p class="lede">Pontos de observação, épocas de migração e boas práticas para quem está a começar ou já tem os binóculos ao pescoço.</p>
+  {% include guias.html %}
+</section>

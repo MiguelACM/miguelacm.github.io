@@ -1,0 +1,17 @@
+{%- comment -%} Cartões de todas as zonas, na língua da página. {%- endcomment -%}
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign zdocs = site.zonas | where: "lang", page.lang -%}
+<div class="zcards">
+{%- for z in zdocs -%}
+{%- assign n = 0 -%}
+{%- for e in site.data.especies -%}{%- if e[1].zones[z.slug] -%}{%- assign n = n | plus: 1 -%}{%- endif -%}{%- endfor -%}
+{%- assign zd = site.data.zonas[z.slug] -%}
+<a class="zcard" href="{{ z.url | relative_url }}">
+<svg class="ill" viewBox="0 0 200 140" aria-hidden="true"><use href="#{{ zd.ill | default: 'i-oak' }}"/></svg>
+<span class="meta">{{ z.region }}</span>
+<h3>{{ z.title }}</h3>
+<p style="font-size:15px">{{ z.summary }}</p>
+<span class="meta">{{ n }} {{ t.results }}</span>
+</a>
+{%- endfor -%}
+</div>

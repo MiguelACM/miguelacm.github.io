@@ -1,0 +1,36 @@
+---
+ref: especies
+title: Species
+wide: true
+summary: Every species in the guide. Filter by group, time of year, region or how certain its presence is.
+lang: en
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<section class="sheet" id="catalog">
+  <p class="eyebrow">{{ t.species }}</p>
+  <h1 class="title">{{ page.title }}</h1>
+  <p class="lede">{{ page.summary }}</p>
+  <div class="filters">
+    <div class="chips" role="group" aria-label="{{ t.group }}">
+      <button class="chip" type="button" data-group="" aria-pressed="true">{{ t.any }}</button>
+      {%- for g in site.data.grupos %}
+      <button class="chip" type="button" data-group="{{ g.id }}" aria-pressed="false">{{ g[page.lang] }}</button>
+      {%- endfor %}
+    </div>
+  </div>
+  <div class="filters">
+    <label>{{ t.month }}
+      <select id="f-month"><option value="">{{ t.any }}</option>{% for mo in t.months %}<option value="{{ forloop.index0 }}">{{ mo | capitalize }}</option>{% endfor %}</select>
+    </label>
+    <label>{{ t.zone }}
+      <select id="f-zone"><option value="">{{ t.any_f }}</option>{% assign zdocs = site.zonas | where: "lang", page.lang %}{% for z in zdocs %}<option value="{{ z.slug }}">{{ z.title }}</option>{% endfor %}</select>
+    </label>
+    <label>{{ t.evidence }}
+      <select id="f-ev"><option value="">{{ t.any_f }}</option>{% for e in t.evidence_labels %}<option value="{{ e[0] }}">{{ e[1] }}</option>{% endfor %}</select>
+    </label>
+  </div>
+  <p class="count" id="count" data-label="{{ t.results }}" aria-live="polite"></p>
+  {% include especies.html %}
+  <p id="empty" hidden style="margin-top:18px;color:var(--muted)">{{ t.no_results }}</p>
+</section>

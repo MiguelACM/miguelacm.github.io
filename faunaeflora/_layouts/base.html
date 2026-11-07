@@ -1,0 +1,54 @@
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign root = "/faunaeflora/" | append: page.lang | append: "/" -%}
+{%- comment -%} Endereço da mesma página na outra língua (mesmo nome de ficheiro ou mesmo "ref"). {%- endcomment -%}
+{%- assign ref = page.ref | default: page.slug -%}
+{%- assign alt_url = "/faunaeflora/" | append: t.other | append: "/" -%}
+{%- if ref -%}
+{%- if page.collection -%}{%- assign pool = site[page.collection] -%}{%- else -%}{%- assign pool = site.pages -%}{%- endif -%}
+{%- for p in pool -%}{%- assign pref = p.ref | default: p.slug -%}{%- if pref == ref and p.lang == t.other -%}{%- assign alt_url = p.url -%}{%- endif -%}{%- endfor -%}
+{%- endif -%}
+<!doctype html>
+<html lang="{{ t.code }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{% if page.title %}{{ page.title }} · {% endif %}{{ t.site_name }}</title>
+<meta name="description" content="{{ page.summary | default: t.site_tagline | strip_html | escape }}">
+<link rel="alternate" hreflang="{{ page.lang }}" href="{{ page.url | relative_url }}">
+<link rel="alternate" hreflang="{{ t.other }}" href="{{ alt_url | relative_url }}">
+<script>try{var th=localStorage.getItem("ff-theme");if(th)document.documentElement.setAttribute("data-theme",th)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="{{ '/faunaeflora/assets/css/style.css' | relative_url }}">
+{%- if page.leaflet %}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+{%- endif %}
+</head>
+<body>
+<a class="skip" href="#main">{{ t.skip }}</a>
+{% include ilustracoes.html %}
+<header class="top">
+  <a class="brand" href="{{ root | relative_url }}"><svg class="inkg" viewBox="0 0 200 140" aria-hidden="true"><use href="#i-owl"/></svg>{{ t.site_name }}</a>
+  <nav class="nav" aria-label="{{ t.site_name }}">
+    <a href="{{ root | append: t.zones_path | append: '/' | relative_url }}"{% if page.url contains t.zones_path %} aria-current="page"{% endif %}>{{ t.zones }}</a>
+    <a href="{{ root | append: t.species_path | append: '/' | relative_url }}"{% if page.url contains t.species_path %} aria-current="page"{% endif %}>{{ t.species }}</a>
+    <a href="{{ root | append: 'birdwatching/' | relative_url }}"{% if page.url contains 'birdwatching' or page.url contains t.guides_path %} aria-current="page"{% endif %}>{{ t.birdwatching }}</a>
+    <a href="{{ root | append: t.about_path | append: '/' | relative_url }}"{% if page.url contains t.about_path %} aria-current="page"{% endif %}>{{ t.about }}</a>
+  </nav>
+  <div class="tools">
+    <a class="btn" href="{{ alt_url | relative_url }}" hreflang="{{ t.other }}" lang="{{ t.other }}">{{ t.other_label }}</a>
+    <button class="btn" type="button" id="theme-toggle" aria-label="{{ t.theme }}" title="{{ t.theme }}">◐</button>
+  </div>
+</header>
+<main id="main" class="book{% if page.wide %} wide{% endif %}">
+{{ content }}
+</main>
+<footer class="foot">
+  <span>{{ t.site_name }} · {{ t.illustration_note }}</span>
+  <a href="{{ root | append: t.about_path | append: '/' | relative_url }}">{{ t.edit_note }}</a>
+</footer>
+<script src="{{ '/faunaeflora/assets/js/site.js' | relative_url }}"></script>
+</body>
+</html>

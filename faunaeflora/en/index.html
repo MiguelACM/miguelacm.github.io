@@ -1,0 +1,38 @@
+---
+ref: home
+leaflet: true
+summary: A field guide to the wildlife and plants of Portugal, by region. What to look for, where and when, with a focus on birdwatching.
+lang: en
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<section class="sheet">
+  <p class="eyebrow">Field notebook</p>
+  <h1 class="title">Portugal Fauna &amp; Flora</h1>
+  <p class="lede">A guide to recognising the animals and plants of each region of Portugal and knowing when and where to look for them. Each species page says whether it is <b>confirmed</b> by local sources or only <b>probable</b>, shows the best months to see it and the signs it leaves behind.</p>
+  <p class="lede" style="color:var(--muted)">We start with Serra de Sicó and Paul de Arzila. More regions will follow.</p>
+</section>
+
+<section class="sheet" id="zones">
+  <p class="eyebrow">{{ t.zones }}</p>
+  <h2>Where to go</h2>
+  <div id="zone-map" class="lmap" role="region" aria-label="Map of regions"></div>
+  <script type="application/json" id="zone-data">[{% assign zdocs = site.zonas | where: "lang", page.lang %}{% for z in zdocs %}{"name":{{ z.title | jsonify }},"url":{{ z.url | relative_url | jsonify }},"c":{{ site.data.zonas[z.slug].center | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]</script>
+  {% include zonas.html %}
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">{{ t.this_month }}</p>
+  <h2>In good season in <span id="now-month" data-months="{{ t.months | join: '|' }}">…</span></h2>
+  <p class="lede">{{ t.this_month_lede }}</p>
+  <div id="now" data-max="8">{% include especies.html hidden=true %}</div>
+  <noscript><p><a href="{{ '/faunaeflora/en/species/' | relative_url }}">{{ t.all_species }}</a></p></noscript>
+  <p style="margin-top:18px"><a class="btn" href="{{ '/faunaeflora/en/species/' | relative_url }}">{{ t.all_species }} →</a></p>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">{{ t.birdwatching }}</p>
+  <h2>Birdwatching</h2>
+  <p class="lede">Viewpoints, migration seasons and good practice, whether you're just starting out or already have binoculars round your neck.</p>
+  {% include guias.html %}
+</section>

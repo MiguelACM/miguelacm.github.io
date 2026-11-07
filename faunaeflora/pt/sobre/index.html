@@ -1,0 +1,28 @@
+---
+ref: sobre
+title: Sobre
+summary: O que é este guia, como ler as fichas e como ajudar a completá-lo.
+lang: pt
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<article class="sheet">
+  <p class="eyebrow">Sobre</p>
+  <h1 class="title">Sobre este guia</h1>
+  <div class="prose" style="margin-top:20px">
+    <p>Este é um caderno de campo sobre a fauna e a flora de Portugal, organizado por zonas. O objetivo é prático: ajudar a saber o que procurar, onde e em que altura do ano, e como observar sem perturbar.</p>
+    <h2>Como ler as fichas</h2>
+    <div class="legend" style="margin-top:14px">
+      {%- for e in t.evidence_labels %}
+      <div class="row">{% assign ek = e[0] %}{% include tag-presenca.html e=ek %}<span>{{ t.evidence_help[e[0]] }}</span></div>
+      {%- endfor %}
+      <div class="row"><span>{% include meses.html m="001111000000" %}</span><span>A barra de meses marca a <b>melhor época</b> para procurar cada espécie.</span></div>
+    </div>
+    <p>O estatuto de conservação, quando aparece, é o da lista vermelha portuguesa citada nas fontes de cada zona. As dicas de horário e de pistas seguem a história natural geral da Península Ibérica quando não há registo local específico.</p>
+    <h2>Ilustrações</h2>
+    <p>As ilustrações são desenhos originais e simplificados, feitos para este guia. Servem para dar uma ideia da forma e das cores, não para identificação rigorosa. Para isso, use um guia de campo ou fotografias de referência.</p>
+    <h2>Ajudar</h2>
+    <p>Muitas espécies estão marcadas como prováveis porque falta um registo local publicado. Se vir uma delas, registe a observação no <a href="https://ebird.org/">eBird</a> ou no <a href="https://www.inaturalist.org/">iNaturalist</a>, com data, local aproximado e, se possível, fotografia. Nunca publique locais de ninho de espécies sensíveis.</p>
+    <p>Encontrou um erro? Diga-nos através do repositório do site no GitHub.</p>
+  </div>
+</article>

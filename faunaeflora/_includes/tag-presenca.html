@@ -1,0 +1,7 @@
+{%- comment -%} Etiqueta de presença numa zona. Parâmetro: e = confirmada | provavel | nao-confirmada {%- endcomment -%}
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- if include.e -%}
+{%- assign cls = "prov" -%}
+{%- if include.e == "confirmada" -%}{%- assign cls = "ok" -%}{%- elsif include.e == "nao-confirmada" -%}{%- assign cls = "no" -%}{%- endif -%}
+<span class="tag {{ cls }}" title="{{ t.evidence_help[include.e] }}">{{ t.evidence_labels[include.e] }}</span>
+{%- endif -%}

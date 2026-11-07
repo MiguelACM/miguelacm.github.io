@@ -1,0 +1,14 @@
+{%- comment -%} Cartões dos guias, na língua da página. Parâmetro opcional: zona. {%- endcomment -%}
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign gdocs = site.guias | where: "lang", page.lang | sort: "order" -%}
+<div class="zcards">
+{%- for gd in gdocs -%}
+{%- if include.zona and gd.zona != include.zona -%}{%- continue -%}{%- endif -%}
+<a class="zcard" href="{{ gd.url | relative_url }}">
+<span class="meta">{{ t.guides }}{% if gd.zona %} · {{ site.zonas | where: "lang", page.lang | where: "slug", gd.zona | map: "title" | first }}{% endif %}</span>
+<h3>{{ gd.title }}</h3>
+<p style="font-size:15px">{{ gd.summary }}</p>
+<span class="meta">{{ t.read_guide }} →</span>
+</a>
+{%- endfor -%}
+</div>

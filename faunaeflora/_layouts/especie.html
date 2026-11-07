@@ -1,0 +1,45 @@
+---
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign root = "/faunaeflora/" | append: page.lang | append: "/" -%}
+{%- assign d = site.data.especies[page.slug] -%}
+{%- assign g = site.data.grupos | where: "id", d.group | first -%}
+{%- assign ill = d.ill | default: g.ill -%}
+<section class="sheet">
+  <p class="crumbs"><a href="{{ root | relative_url }}">{{ t.home }}</a> / <a href="{{ root | append: t.species_path | append: '/' | relative_url }}">{{ t.species }}</a> / {{ g[page.lang] }}</p>
+  <div class="hero-sp">
+    <svg class="ill" viewBox="0 0 200 140"{% if d.ill_style %} style="{{ d.ill_style }}"{% endif %} role="img" aria-label="{{ page.title }}"><use href="#{{ ill }}"/></svg>
+    <div class="stack" style="gap:10px">
+      <p class="eyebrow" style="margin:0">{{ g[page.lang] }}</p>
+      <h1>{{ page.title }}</h1>
+      <p class="sci">{{ d.sci }}</p>
+      <div class="tags">
+        {%- if d.status -%}<span class="tag{% if d.status == 'VU' or d.status == 'EN' or d.status == 'CR' %} no{% elsif d.status == 'NT' %} prov{% endif %}" title="{{ t.status }}">{{ t.status_labels[d.status] }}</span>{%- endif -%}
+        {%- if d.endemic -%}<span class="tag ok">{{ t.endemic }}</span>{%- endif -%}
+        {%- if d.venomous -%}<span class="tag no">{{ t.venomous }}</span>{%- endif -%}
+        {%- for b in page.badges -%}<span class="tag">{{ b }}</span>{%- endfor -%}
+      </div>
+      {% include meses.html m=d.months %}
+    </div>
+  </div>
+  <p class="lede" style="margin-top:22px">{{ page.summary }}</p>
+  {%- assign body = content | strip -%}
+  {%- if body != "" %}
+  <div class="prose" style="margin-top:14px">{{ content }}</div>
+  {%- endif %}
+  <dl class="facts">
+    <dt>{{ t.how }}</dt><dd>{{ page.how }}</dd>
+  </dl>
+</section>
+<section class="sheet">
+  <p class="eyebrow">{{ t.where_to_see }}</p>
+  {%- for z in d.zones %}
+  {%- assign zk = z[0] %}
+  {%- assign zdoc = site.zonas | where: "lang", page.lang | where: "slug", zk | first %}
+  <div class="zone-row">
+    <h3>{% if zdoc %}<a href="{{ zdoc.url | relative_url }}">{{ zdoc.title }}</a>{% else %}{{ zk }}{% endif %} {% assign ek = z[1] %}{% include tag-presenca.html e=ek %}</h3>
+    {%- if page.where[zk] %}<p style="margin-top:6px">{{ page.where[zk] }}</p>{% endif %}
+  </div>
+  {%- endfor %}
+</section>

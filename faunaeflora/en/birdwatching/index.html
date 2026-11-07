@@ -1,0 +1,24 @@
+---
+ref: birdwatching
+title: Birdwatching
+summary: Guides to birdwatching in Portugal, from your first outings with binoculars to the best viewpoints in each region.
+lang: en
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<section class="sheet">
+  <p class="eyebrow">Birdwatching</p>
+  <h1 class="title">Birdwatching</h1>
+  <p class="lede">Portugal lies on the migration route between Europe and Africa, and packs mountains, estuaries, cereal plains and sea cliffs into a small country. That makes it one of the best places in Europe to watch birds all year round.</p>
+  <p class="lede">Here you'll find general guides for beginners and regional guides with viewpoints, seasons and target species.</p>
+  {% include guias.html %}
+</section>
+<section class="sheet">
+  <p class="eyebrow">{{ t.zones }}</p>
+  <h2>Birds by region</h2>
+  {%- assign zdocs = site.zonas | where: "lang", page.lang %}
+  {%- for z in zdocs %}
+  <h3 style="margin-top:22px"><a href="{{ z.url | relative_url }}">{{ z.title }}</a></h3>
+  {% include especies.html zona=z.slug grupo="aves" %}
+  {%- endfor %}
+</section>

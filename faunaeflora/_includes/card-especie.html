@@ -1,0 +1,13 @@
+{%- comment -%} Cartão de uma espécie. Parâmetros: doc (ficha), zona (opcional), hidden (opcional). {%- endcomment -%}
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign d = site.data.especies[include.doc.slug] -%}
+{%- assign g = site.data.grupos | where: "id", d.group | first -%}
+{%- assign ill = d.ill | default: g.ill -%}
+<a class="card" href="{{ include.doc.url | relative_url }}" data-group="{{ d.group }}" data-months="{{ d.months }}" data-evidence="{% for z in d.zones %} {{ z[0] }}:{{ z[1] }}{% endfor %} "{% if include.hidden %} hidden{% endif %}>
+<svg class="ill" viewBox="0 0 200 140"{% if d.ill_style %} style="{{ d.ill_style }}"{% endif %} aria-hidden="true"><use href="#{{ ill }}"/></svg>
+<h3>{{ include.doc.title }}</h3>
+<p class="sci">{{ d.sci }}</p>
+<div class="tags">{%- if include.zona -%}{%- assign ek = d.zones[include.zona] -%}{%- include tag-presenca.html e=ek -%}{%- endif -%}{%- if d.status -%}<span class="tag">{{ t.status_labels[d.status] }}</span>{%- endif -%}{%- if d.venomous -%}<span class="tag no">{{ t.venomous }}</span>{%- endif -%}</div>
+{% include meses.html m=d.months %}
+{% if include.zona and include.doc.where[include.zona] %}<p class="short">{{ include.doc.where[include.zona] }}</p>{% endif %}
+</a>

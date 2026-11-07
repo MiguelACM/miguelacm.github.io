@@ -1,0 +1,24 @@
+---
+ref: birdwatching
+title: Birdwatching
+summary: Guias para observar aves em Portugal, das primeiras saídas de binóculos aos melhores pontos de cada zona.
+lang: pt
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<section class="sheet">
+  <p class="eyebrow">Observar aves</p>
+  <h1 class="title">Birdwatching</h1>
+  <p class="lede">Portugal está na rota de migração entre a Europa e África e junta, num território pequeno, montanhas, estuários, planícies cerealíferas e falésias. Isso faz dele um dos melhores sítios da Europa para observar aves durante todo o ano.</p>
+  <p class="lede">Aqui encontra guias gerais, para quem está a começar, e guias por zona, com pontos de observação, épocas e espécies-alvo.</p>
+  {% include guias.html %}
+</section>
+<section class="sheet">
+  <p class="eyebrow">{{ t.zones }}</p>
+  <h2>Aves por zona</h2>
+  {%- assign zdocs = site.zonas | where: "lang", page.lang %}
+  {%- for z in zdocs %}
+  <h3 style="margin-top:22px"><a href="{{ z.url | relative_url }}">{{ z.title }}</a></h3>
+  {% include especies.html zona=z.slug grupo="aves" %}
+  {%- endfor %}
+</section>

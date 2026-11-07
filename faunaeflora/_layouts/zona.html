@@ -1,0 +1,46 @@
+---
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign zd = site.data.zonas[page.slug] -%}
+{{ content }}
+{%- if page.calendar %}
+<section class="sheet" id="calendario">
+  <p class="eyebrow">{{ t.calendar_eyebrow }}</p>
+  <h2>{{ t.calendar }}</h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th>{{ t.month }}</th><th>{{ t.highlights }}</th><th>{{ t.where_to_go }}</th></tr></thead>
+      <tbody>
+      {%- for c in page.calendar %}
+        <tr><td>{{ t.months[forloop.index0] | capitalize }}</td><td>{{ c.what }}</td><td>{{ c.where }}</td></tr>
+      {%- endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{%- endif %}
+<section class="sheet">
+  <p class="eyebrow">{{ t.guides }}</p>
+  <h2>{{ t.birdwatching }}</h2>
+  {% include guias.html zona=page.slug %}
+</section>
+{%- if page.rules %}
+<section class="sheet" id="regras">
+  <p class="eyebrow">{{ t.rules_eyebrow }}</p>
+  <h2>{{ t.rules }}</h2>
+  <ol class="rules">
+  {%- for r in page.rules %}
+    <li><div><b>{{ r.title }}</b> {{ r.text }}</div></li>
+  {%- endfor %}
+  </ol>
+  {%- if zd.sources %}
+  <h3 style="margin-top:30px">{{ t.sources }}</h3>
+  <ul class="src">
+  {%- for s in zd.sources %}
+    <li><a href="{{ s.url }}">{{ s[page.lang] }}</a></li>
+  {%- endfor %}
+  </ul>
+  {%- endif %}
+</section>
+{%- endif %}

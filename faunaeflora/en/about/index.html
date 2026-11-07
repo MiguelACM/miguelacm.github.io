@@ -1,0 +1,28 @@
+---
+ref: sobre
+title: About
+summary: What this guide is, how to read the species pages and how to help complete it.
+lang: en
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<article class="sheet">
+  <p class="eyebrow">About</p>
+  <h1 class="title">About this guide</h1>
+  <div class="prose" style="margin-top:20px">
+    <p>This is a field notebook on the wildlife and plants of Portugal, organised by region. Its aim is practical: to help you know what to look for, where and at what time of year, and how to watch without disturbing.</p>
+    <h2>Reading the species pages</h2>
+    <div class="legend" style="margin-top:14px">
+      {%- for e in t.evidence_labels %}
+      <div class="row">{% assign ek = e[0] %}{% include tag-presenca.html e=ek %}<span>{{ t.evidence_help[e[0]] }}</span></div>
+      {%- endfor %}
+      <div class="row"><span>{% include meses.html m="001111000000" %}</span><span>The month bar marks the <b>best season</b> to look for each species.</span></div>
+    </div>
+    <p>Conservation status, where shown, is from the Portuguese red list cited in each region's sources. Timing and field-sign tips follow the general natural history of the Iberian Peninsula where there is no specific local record.</p>
+    <h2>Illustrations</h2>
+    <p>The illustrations are original, simplified drawings made for this guide. They give an idea of shape and colour, not a basis for rigorous identification. For that, use a field guide or reference photos.</p>
+    <h2>Helping out</h2>
+    <p>Many species are marked as probable because there is no published local record. If you see one, log it on <a href="https://ebird.org/">eBird</a> or <a href="https://www.inaturalist.org/">iNaturalist</a> with the date, approximate location and, if possible, a photo. Never publish nest sites of sensitive species.</p>
+    <p>Found a mistake? Let us know through the site's GitHub repository.</p>
+  </div>
+</article>

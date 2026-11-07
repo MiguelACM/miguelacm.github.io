@@ -1,0 +1,155 @@
+---
+title: Serra de Sicó e Paul de Arzila
+region: Condeixa · Penela · Ansião · Alvaiázere · Pombal
+summary: Carso calcário com mais de 300 grutas, rapinas nas escarpas e morcegos de importância nacional, e a 20 km um paul de caniçal cheio de garças, lontras e patos.
+calendar:
+  - what: Bufo-real a cantar; patos invernantes; tritões entram na água
+    where: Arzila, cascata do Rio dos Mouros
+  - what: Pico da migração de sapos; cotovia-pequena e melro-azul começam a cantar
+    where: Charcos do planalto à noite, Arzila
+  - what: Chegam a águia-cobreira, o milhafre-preto e a garça-vermelha; primeiros morcegos
+    where: Serra de Sicó, Arzila
+  - what: Garçote, chasco, rouxinóis-dos-caniços; lagarto-de-água; borboletas e orquídeas
+    where: Arzila cedo, Buracas do Casmilo
+  - what: "Pico geral: todas as aves estivais a cantar; répteis; noitibós"
+    where: Todos os locais, longe das escarpas
+  - what: Crias de garças e rapinas; morcegos com crias; vaca-loura
+    where: Arzila, Rio dos Mouros ao entardecer
+  - what: Juvenis em voo; peixes visíveis em água baixa
+    where: Pontes dos rios, saídas noturnas
+  - what: Começa a passagem de aves; cobras ao crepúsculo
+    where: Arzila, pontes do Anços e do Dueça
+  - what: Passagem outonal de passeriformes em Arzila; partem a águia-cobreira e o andorinhão-real
+    where: Arzila
+  - what: Bufo-real retoma o canto; salamandras com as chuvas; chegam os patos
+    where: Buracas do Casmilo, canhões
+  - what: Morcegos entram em hibernação; guarda-rios bem visível
+    where: Arzila, passadiços do Rio dos Mouros
+  - what: Raposa em cio; bufo-real inicia a nidificação
+    where: Arzila, escuta noturna nos canhões
+rules:
+  - title: Não entre em grutas.
+    text: O plano de gestão de 2026 proíbe o acesso a grutas com colónias de morcegos, como o Algar da Água e a Gruta do Bacelinho. À entrada não se sabe o que lá vive, por isso a regra é não entrar sem autorização e guia.
+  - title: Evite as escarpas de janeiro a julho.
+    text: Nos Poios, nas Buracas e no Rio dos Mouros a escalada perturba o bufo-real e o andorinhão-real a nidificar.
+  - title: Guarde distância dos ninhos.
+    text: Use binóculos. Se a ave se agitar, afaste-se. Não use gravações de cantos na primavera nem publique locais de ninho.
+  - title: Não manuseie anfíbios nem répteis.
+    text: A pele dos anfíbios absorve cremes e transmite doenças. Volte a pôr cada pedra no sítio.
+  - title: Fique nos trilhos.
+    text: Em Arzila, sem ruído, sem lume e sem colher plantas. Não arranque orquídeas. Verifique o risco de incêndio antes de sair.
+  - title: Registe o que vê.
+    text: Muitas espécies de Sicó estão por confirmar. Uma observação com data, local aproximado e foto, enviada para o eBird, o iNaturalist ou o ICNF, ajuda a completar o inventário.
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+<section class="sheet cover" aria-label="Capa">
+  {% include sico-capa.html label="Escarpas calcárias ao entardecer, com um bufo-real pousado e morcegos em voo" %}
+  <div class="titles">
+    <p class="crumbs"><a href="{{ '/faunaeflora/pt/' | relative_url }}">{{ t.home }}</a> / <a href="{{ '/faunaeflora/pt/zonas/' | relative_url }}">{{ t.zones }}</a></p>
+    <p class="eyebrow">Caderno de campo</p>
+    <h1>Sicó</h1>
+    <p class="sub">{{ page.region }}</p>
+    <p class="intro">Um guia curto para reconhecer os animais e as plantas da região e saber quando e onde os procurar.</p>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Antes de sair</p>
+  <h2>Dois mundos a 20 km um do outro</h2>
+  <p class="lede">O <b>carso de Sicó</b> é calcário: lapiás, canhões, carvalhais de carvalho-cerquinho e mais de 300 grutas. É protegido sobretudo pelos morcegos e pela fauna que só existe nas suas grutas. O <b>Paul de Arzila</b>, em parte na freguesia de Anobra, é um pântano de caniçal com 181 espécies de vertebrados e o sítio onde ver animais é mais garantido.</p>
+  <div class="two">
+    {% include sico-mapa.html label="Esquema dos locais de observação entre Coimbra e Alvaiázere" massif="MACIÇO DE SICÓ" river="rio Mondego" note="Esquema aproximado, sem escala · N ↑" %}
+    <div class="legend">
+      {%- for e in t.evidence_labels %}
+      <div class="row">{% assign ek = e[0] %}{% include tag-presenca.html e=ek %}<span>{{ t.evidence_help[e[0]] }}</span></div>
+      {%- endfor %}
+      <div class="stack" style="gap:6px">
+        {% include meses.html m="001111000000" %}
+        <span>A barra de meses marca a <b>melhor época</b> para procurar cada espécie.</span>
+      </div>
+      <p style="color:var(--muted);font-size:14px">As dicas de horário e de pistas no terreno seguem a história natural geral da Península Ibérica quando não há registo local específico.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Mamíferos voadores</p>
+  <h2>Os morcegos das grutas</h2>
+  <p class="lede">São a razão principal da proteção de Sicó. As grutas do maciço guardam abrigos de importância nacional para três espécies cavernícolas. Desde 2026 é <b>proibido entrar</b> em grutas com colónias, por isso observam-se cá fora, ao entardecer.</p>
+  {% include especies.html zona="sico" grupo="morcegos" %}
+  <div class="note">Na área do parque eólico de Alvaiázere estão registadas 12 espécies de morcegos com estatuto desfavorável, incluindo o morcego-de-franja-do-sul. O morcego-de-ferradura-pequeno é provável em ruínas e casas de pedra abandonadas.</div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Aves da serra e das escarpas</p>
+  <h2>Rapinas sobre o calcário</h2>
+  {% include especies.html zona="sico" slugs="bubo-bubo circaetus-gallicus falco-tinnunculus buteo-buteo monticola-solitarius tachymarptis-melba" %}
+  <div class="mini">
+    <div><b>Chasco-cinzento, trigueirão, perdiz</b><span class="tag ok">Confirmadas</span><br>Planalto de Sicó na primavera. O trigueirão soa a molho de chaves; a perdiz canta ao amanhecer.</div>
+    <div><b>Noitibós e mochos</b><span class="tag prov">Prováveis</span><br>Maio a agosto, na primeira hora de noite. O noitibó-cinzento "ronrona" em clareiras de mato.</div>
+  </div>
+  <div class="note">A <b>águia-de-Bonelli</b> e a <b>gralha-de-bico-vermelho</b> não estão confirmadas em Sicó. Um avistamento seria valioso: registe-o no eBird ou comunique ao ICNF, sem divulgar locais de ninho.</div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Reserva Natural do Paul de Arzila</p>
+  <h2>Garças, lontras e patos do caniçal</h2>
+  <p class="lede">O circuito de 1,5 a 2 km tem passadiço, observatórios e uma torre. O Centro de Interpretação abre nos dias úteis das 9h às 13h e das 14h às 17h30. Vale a pena em qualquer estação, e cada uma traz espécies diferentes.</p>
+  {% include especies.html zona="sico" slugs="ardea-purpurea ixobrychus-minutus nycticorax-nycticorax circus-aeruginosus alcedo-atthis lutra-lutra" %}
+  <div class="mini">
+    <div><b>Patos invernantes</b><span class="tag ok">Confirmados</span><br>Novembro a fevereiro. A marrequinha chega a 3,6% do total do país.</div>
+    <div><b>Rouxinóis-dos-caniços</b><span class="tag ok">Confirmados</span><br>Abril a julho, cantos rangentes ao amanhecer. No outono passam felosas e o pisco-de-peito-azul.</div>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Mamíferos da serra</p>
+  <h2>Pistas mais do que avistamentos</h2>
+  <p class="lede">Não há uma lista publicada dos mamíferos terrestres de Sicó. O javali está confirmado; os outros são prováveis. Quase todos são noturnos, por isso o melhor é aprender a ler os sinais que deixam.</p>
+  {% include especies.html zona="sico" slugs="sus-scrofa genetta-genetta" %}
+  <div class="tbl">
+    <table>
+      <thead><tr><th>Espécie</th><th>Quando</th><th>Pistas</th></tr></thead>
+      <tbody>
+        <tr><td>Raposa</td><td>Todo o ano, amanhecer e anoitecer</td><td>Dejetos retorcidos em pedras e cruzamentos; ladridos roucos de dezembro a fevereiro</td></tr>
+        <tr><td>Texugo</td><td>Fevereiro a novembro, de noite</td><td>Tocas com grandes montes de terra, trilhos batidos, latrinas em covas</td></tr>
+        <tr><td>Saca-rabos</td><td>De dia, a meio da manhã</td><td>Atravessa caminhos, por vezes em fila; pegadas alongadas</td></tr>
+        <tr><td>Coelho-bravo</td><td>Amanhecer e entardecer</td><td>Latrinas de bolinhas, tocas; está classificado como Vulnerável</td></tr>
+        <tr><td>Ouriço-cacheiro</td><td>Noites quentes, março a outubro</td><td>Dejetos negros e brilhantes com restos de insetos; bufidos nas hortas</td></tr>
+        <tr><td>Fuinha</td><td>De noite</td><td>Dejetos com sementes de fruta sobre muros e telhados das aldeias</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="note green">O <b>gato-bravo</b> (Em perigo) é referido para o Paul de Arzila, mas confunde-se com gatos domésticos assilvestrados. Só armadilhagem fotográfica e genética o confirmam.</div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Anfíbios e répteis</p>
+  <h2>Tritões nas grutas, lagartos nos lapiás</h2>
+  <p class="lede">Os anfíbios saem nas noites de chuva do outono ao fim do inverno. Os répteis aquecem-se em manhãs de sol, da primavera ao verão. Fotografe sem tocar.</p>
+  {% include especies.html zona="sico" slugs="triturus-marmoratus salamandra-salamandra timon-lepidus lacerta-schreiberi vipera-latastei" %}
+  <div class="mini">
+    <div><b>Sapo-comum</b><span class="tag ok">Confirmada</span><br>Atravessa estradas nas primeiras noites de chuva. Conduza devagar perto de Arzila.</div>
+    <div><b>Rela e rã-verde</b><span class="tag prov">Prováveis</span><br>Coro estridente nos caniçais de março a maio; a rã-verde mergulha de dia nas valas.</div>
+    <div><b>Sapo-parteiro</b><span class="tag prov">Provável</span><br>Um "piu" de sino em muros de pedra seca, da primavera ao verão.</div>
+    <div><b>Cágado-mediterrânico</b><span class="tag prov">Provável</span><br>Ao sol em troncos e margens de valas; mergulha quando nos vê.</div>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Rios, grutas e prados</p>
+  <h2>A fauna escondida</h2>
+  {% include especies.html zona="sico" slugs="lampetra-planeri pseudochondrostoma-polylepis luciobarbus-bocagei iberoporus-pluto euphydryas-aurinia" %}
+  <div class="note green">Do carso de Sicó estão descritas pelo menos <b>cinco espécies que não existem em mais lado nenhum</b>: o escaravelho <i>Iberoporus pluto</i>, o estafilinídeo <i>Domene lusitanica</i>, os pseudoscorpiões <i>Roncocreagris borgesi</i> e <i>R. gepesi</i> e o bicho-de-conta <i>Trichoniscoides sicoensis</i>. Vivem em grutas de Penela e Ansião ameaçadas por pisoteio, esgotos e pó de pedreira.</div>
+  <div class="mini">
+    <div><b>Vaca-loura</b><span class="tag prov">Provável</span><br>Junho e julho, ao crepúsculo, junto a carvalhos-cerquinhos velhos.</div>
+    <div><b>Polinizadores das orquídeas</b><span class="tag prov">Prováveis</span><br>Março a maio nos prados calcários. Observe sem pisar as orquídeas.</div>
+  </div>
+</section>
+
+<section class="sheet">
+  <p class="eyebrow">Flora</p>
+  <h2>Carvalhais e prados calcários</h2>
+  <p class="lede">A paisagem de Sicó é feita de carvalhais de carvalho-cerquinho, matos baixos sobre o calcário e prados secos que, na primavera, se enchem de flores e orquídeas. Esta secção ainda está a ser completada.</p>
+  {% include especies.html zona="sico" grupo="plantas" %}
+</section>

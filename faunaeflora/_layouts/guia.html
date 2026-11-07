@@ -1,0 +1,22 @@
+---
+layout: base
+---
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign root = "/faunaeflora/" | append: page.lang | append: "/" -%}
+<article class="sheet">
+  <p class="crumbs"><a href="{{ root | relative_url }}">{{ t.home }}</a> / <a href="{{ root | append: 'birdwatching/' | relative_url }}">{{ t.birdwatching }}</a></p>
+  <p class="eyebrow">{{ t.guides }}</p>
+  <h1 class="title">{{ page.title }}</h1>
+  <p class="lede">{{ page.summary }}</p>
+  <div class="prose" style="margin-top:26px">
+{{ content }}
+  </div>
+</article>
+{%- if page.zona %}
+<section class="sheet">
+  <p class="eyebrow">{{ t.birds_in_zone }}</p>
+  {%- assign zdoc = site.zonas | where: "lang", page.lang | where: "slug", page.zona | first %}
+  <h2><a href="{{ zdoc.url | relative_url }}">{{ zdoc.title }}</a></h2>
+  {% include especies.html zona=page.zona grupo="aves" %}
+</section>
+{%- endif %}

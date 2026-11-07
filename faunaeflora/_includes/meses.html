@@ -1,0 +1,7 @@
+{%- comment -%} Barra de 12 meses. Parâmetro: m = "010110000000" (jan→dez). {%- endcomment -%}
+{%- assign t = site.data.i18n[page.lang] -%}
+{%- assign m = include.m | append: "" -%}
+{%- if m contains "1" -%}
+{%- capture lbl -%}{%- for i in (0..11) -%}{%- assign c = m | slice: i -%}{%- if c == "1" -%}{{ t.months[i] }}|{%- endif -%}{%- endfor -%}{%- endcapture -%}
+<div class="m" role="img" aria-label="{{ t.best_season }}: {{ lbl | split: '|' | join: ', ' }}">{%- for i in (0..11) -%}{%- assign c = m | slice: i -%}<span{% if c == "1" %} class="on"{% endif %} aria-hidden="true">{{ t.months_short[i] }}</span>{%- endfor -%}</div>
+{%- endif -%}

@@ -1,0 +1,33 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Fauna e Flora de Portugal · Portugal Fauna & Flora</title>
+<meta name="description" content="Guia de campo da fauna e flora de Portugal, por zonas. A field guide to the wildlife of Portugal, by region.">
+<script>try{var th=localStorage.getItem("ff-theme");if(th)document.documentElement.setAttribute("data-theme",th)}catch(e){}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="{{ '/faunaeflora/assets/css/style.css' | relative_url }}">
+</head>
+<body style="padding-top:28px">
+{% include ilustracoes.html %}
+<main class="book">
+  <section class="sheet">
+    <svg class="ill" viewBox="0 0 200 140" style="max-width:260px;background:none" aria-hidden="true"><use href="#i-owl"/></svg>
+    <p class="eyebrow" style="margin-top:12px">Caderno de campo · Field notebook</p>
+    <h1 class="title">Fauna e Flora de Portugal</h1>
+    <p class="lede">Guia de campo por zonas: que animais e plantas procurar, onde e quando, com destaque para o birdwatching.</p>
+    <p class="lede" lang="en" style="color:var(--muted)">A field guide by region: which animals and plants to look for, where and when, with a focus on birdwatching.</p>
+    <div class="lang-pick">
+      <a class="btn primary" href="{{ '/faunaeflora/pt/' | relative_url }}" hreflang="pt">Entrar em português</a>
+      <a class="btn" href="{{ '/faunaeflora/en/' | relative_url }}" hreflang="en" lang="en">Enter in English</a>
+    </div>
+  </section>
+</main>
+</body>
+</html>

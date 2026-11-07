@@ -1,0 +1,25 @@
+{%- comment -%} Esquema dos locais de Sicó. Parâmetros: label, massif, river, note. {%- endcomment -%}
+    <svg class="map" viewBox="0 0 280 390" role="img" aria-label="{{ include.label }}">
+      <rect x="1" y="1" width="278" height="388" fill="var(--pale)" stroke="var(--rule)"/>
+      <path d="M140 140 C175 130 230 150 246 200 C262 250 250 330 226 372 C200 386 160 360 140 320 C120 290 70 280 60 250 C50 214 100 150 140 140 Z" fill="var(--stone)" stroke="var(--ink)" stroke-width="1.2"/>
+      <text x="150" y="232" class="lbl-s">{{ include.massif }}</text>
+      <path d="M58 70 C70 60 96 64 100 76 C102 88 84 94 68 90 C56 86 50 78 58 70 Z" fill="var(--moss)" opacity=".75" stroke="var(--ink)" stroke-width="1.2"/>
+      <path d="M100 18 C130 40 170 46 200 40 L270 34" fill="none" stroke="var(--sky)" stroke-width="2"/>
+      <text x="214" y="28" class="lbl-s">{{ include.river }}</text>
+      <g fill="var(--ink)">
+        <circle cx="177" cy="45" r="4"/><circle cx="78" cy="77" r="4"/><circle cx="119" cy="126" r="4"/><circle cx="130" cy="138" r="3"/>
+        <circle cx="161" cy="159" r="4"/><circle cx="210" cy="192" r="4"/><circle cx="61" cy="233" r="4"/><circle cx="119" cy="257" r="4"/>
+        <circle cx="177" cy="290" r="4"/><circle cx="219" cy="355" r="4"/>
+      </g>
+      <text x="184" y="49">Coimbra</text>
+      <text x="22" y="108">Paul de Arzila</text>
+      <text x="58" y="124">Condeixa</text>
+      <text x="138" y="136">Conímbriga</text><text x="138" y="147" class="lbl-s">Rio dos Mouros</text>
+      <text x="169" y="163">Buracas do Casmilo</text>
+      <text x="200" y="210">Penela</text>
+      <text x="16" y="250">Vale dos Poios</text>
+      <text x="74" y="276">Serra de Sicó</text>
+      <text x="186" y="294">Ansião</text>
+      <text x="150" y="374">Alvaiázere</text>
+      <text x="12" y="382" class="lbl-s">{{ include.note }}</text>
+    </svg>
