@@ -1,0 +1,142 @@
+# Textos da interface em cada língua. Para acrescentar uma língua nova, copiar
+# um bloco inteiro e traduzir (e acrescentar as pastas correspondentes).
+
+pt:
+  code: pt-PT
+  other: en
+  other_label: English
+  site_name: Fauna e Flora de Portugal
+  site_tagline: Guia de campo por zonas
+  home: Início
+  zones: Zonas
+  species: Espécies
+  birdwatching: Birdwatching
+  about: Sobre
+  zones_path: zonas
+  species_path: especies
+  guides_path: guias
+  about_path: sobre
+  theme: Mudar tema claro/escuro
+  skip: Saltar para o conteúdo
+  months_short: [J, F, M, A, M, J, J, A, S, O, N, D]
+  months: [janeiro, fevereiro, março, abril, maio, junho, julho, agosto, setembro, outubro, novembro, dezembro]
+  best_season: Melhor época
+  where: Onde
+  how: Como observar
+  where_to_see: Onde ver
+  in_zone: Na zona
+  see_zone: Ver a zona
+  see_species: Ver ficha
+  all_species: Todas as espécies
+  group: Grupo
+  status: Estatuto em Portugal
+  evidence: Presença
+  month: Mês
+  zone: Zona
+  any: Todos
+  any_f: Todas
+  results: espécies
+  no_results: Nenhuma espécie corresponde aos filtros.
+  calendar: O que ver em cada mês
+  calendar_eyebrow: Ano de campo
+  highlights: Destaques
+  where_to_go: Onde ir
+  rules: Ver sem perturbar
+  rules_eyebrow: No terreno
+  sources: Fontes principais
+  guides: Guias
+  read_guide: Ler guia
+  this_month: Este mês
+  this_month_lede: Espécies em boa época neste momento, em todas as zonas.
+  birds_in_zone: Aves desta zona
+  illustration_note: Ilustrações originais, não são retratos fiéis.
+  map_attrib: Mapa © colaboradores do OpenStreetMap
+  updated: Atualizado
+  endemic: Endémica
+  venomous: Venenosa
+  edit_note: Encontrou um erro ou tem um registo? Ajude a completar este guia.
+  evidence_labels:
+    confirmada: Confirmada
+    provavel: Provável
+    nao-confirmada: Não confirmada
+  evidence_help:
+    confirmada: Registada em fontes publicadas sobre a zona.
+    provavel: Habitat e distribuição apontam para ela, mas falta registo local publicado.
+    nao-confirmada: Sem prova regional. Se a vir, registe a observação.
+  status_labels:
+    LC: Pouco preocupante
+    NT: Quase ameaçada
+    VU: Vulnerável
+    EN: Em perigo
+    CR: Criticamente em perigo
+    DD: Informação insuficiente
+
+en:
+  code: en
+  other: pt
+  other_label: Português
+  site_name: Portugal Fauna & Flora
+  site_tagline: A field guide by region
+  home: Home
+  zones: Regions
+  species: Species
+  birdwatching: Birdwatching
+  about: About
+  zones_path: zones
+  species_path: species
+  guides_path: guides
+  about_path: about
+  theme: Toggle light/dark theme
+  skip: Skip to content
+  months_short: [J, F, M, A, M, J, J, A, S, O, N, D]
+  months: [January, February, March, April, May, June, July, August, September, October, November, December]
+  best_season: Best season
+  where: Where
+  how: How to see it
+  where_to_see: Where to see it
+  in_zone: In this region
+  see_zone: See the region
+  see_species: See species
+  all_species: All species
+  group: Group
+  status: Status in Portugal
+  evidence: Presence
+  month: Month
+  zone: Region
+  any: All
+  any_f: All
+  results: species
+  no_results: No species match these filters.
+  calendar: What to see each month
+  calendar_eyebrow: The field year
+  highlights: Highlights
+  where_to_go: Where to go
+  rules: Watch without disturbing
+  rules_eyebrow: In the field
+  sources: Main sources
+  guides: Guides
+  read_guide: Read guide
+  this_month: This month
+  this_month_lede: Species in good season right now, across all regions.
+  birds_in_zone: Birds of this region
+  illustration_note: Original illustrations, not exact portraits.
+  map_attrib: Map © OpenStreetMap contributors
+  updated: Updated
+  endemic: Endemic
+  venomous: Venomous
+  edit_note: Spotted a mistake or have a record? Help complete this guide.
+  evidence_labels:
+    confirmada: Confirmed
+    provavel: Probable
+    nao-confirmada: Unconfirmed
+  evidence_help:
+    confirmada: Recorded in published sources about the region.
+    provavel: Habitat and range point to it, but no published local record.
+    nao-confirmada: No regional evidence. If you see it, report it.
+  status_labels:
+    LC: Least concern
+    NT: Near threatened
+    VU: Vulnerable
+    EN: Endangered
+    CR: Critically endangered
+    DD: Data deficient

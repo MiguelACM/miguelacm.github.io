@@ -1,0 +1,213 @@
+# Dados das espécies que não dependem da língua. A chave é o nome dos
+# ficheiros da ficha em _especies/pt/ e _especies/en/.
+#   group: id em grupos.yml       ill: ilustração (opcional)
+#   status: estatuto em Portugal (LC, NT, VU, EN, CR, DD), só se a fonte o indicar
+#   months: 12 dígitos, jan→dez; 1 = boa época para procurar
+#   zones: presença por zona (confirmada | provavel | nao-confirmada)
+
+miniopterus-schreibersii:
+  sci: "Miniopterus schreibersii"
+  group: morcegos
+  ill: i-bat
+  months: "000111111100"
+  zones:
+    sico: confirmada
+myotis-myotis:
+  sci: "Myotis myotis"
+  group: morcegos
+  ill: i-bat
+  months: "000011111000"
+  zones:
+    sico: confirmada
+rhinolophus-ferrumequinum:
+  sci: "Rhinolophus ferrumequinum"
+  group: morcegos
+  ill: i-bat
+  months: "000111111100"
+  zones:
+    sico: confirmada
+bubo-bubo:
+  sci: "Bubo bubo"
+  group: aves
+  ill: i-owl
+  status: NT
+  months: "110000000111"
+  zones:
+    sico: confirmada
+circaetus-gallicus:
+  sci: "Circaetus gallicus"
+  group: aves
+  ill: i-eagle
+  status: NT
+  months: "001111111000"
+  zones:
+    sico: confirmada
+falco-tinnunculus:
+  sci: "Falco tinnunculus"
+  group: aves
+  status: VU
+  months: "111111111111"
+  zones:
+    sico: confirmada
+buteo-buteo:
+  sci: "Buteo buteo"
+  group: aves
+  months: "111111111111"
+  zones:
+    sico: confirmada
+monticola-solitarius:
+  sci: "Monticola solitarius"
+  group: aves
+  months: "011111000000"
+  zones:
+    sico: provavel
+tachymarptis-melba:
+  sci: "Tachymarptis melba"
+  group: aves
+  months: "000111111000"
+  zones:
+    sico: confirmada
+ardea-purpurea:
+  sci: "Ardea purpurea"
+  group: aves
+  ill: i-heron
+  status: VU
+  months: "001111111000"
+  zones:
+    sico: confirmada
+ixobrychus-minutus:
+  sci: "Ixobrychus minutus"
+  group: aves
+  status: VU
+  months: "000111111000"
+  zones:
+    sico: confirmada
+nycticorax-nycticorax:
+  sci: "Nycticorax nycticorax"
+  group: aves
+  months: "001111111000"
+  zones:
+    sico: confirmada
+circus-aeruginosus:
+  sci: "Circus aeruginosus"
+  group: aves
+  months: "111111111111"
+  zones:
+    sico: confirmada
+alcedo-atthis:
+  sci: "Alcedo atthis"
+  group: aves
+  months: "111111111111"
+  zones:
+    sico: confirmada
+lutra-lutra:
+  sci: "Lutra lutra"
+  group: mamiferos
+  ill: i-otter
+  months: "110000000111"
+  zones:
+    sico: confirmada
+sus-scrofa:
+  sci: "Sus scrofa"
+  group: mamiferos
+  ill: i-boar
+  months: "111111111111"
+  zones:
+    sico: confirmada
+genetta-genetta:
+  sci: "Genetta genetta"
+  group: mamiferos
+  ill: i-genet
+  months: "111111111111"
+  zones:
+    sico: provavel
+triturus-marmoratus:
+  sci: "Triturus marmoratus"
+  group: anfibios
+  ill: i-newt
+  months: "111110000000"
+  zones:
+    sico: confirmada
+salamandra-salamandra:
+  sci: "Salamandra salamandra"
+  group: anfibios
+  ill: i-sal
+  months: "111000000111"
+  zones:
+    sico: provavel
+timon-lepidus:
+  sci: "Timon lepidus"
+  group: repteis
+  ill: i-lizard
+  months: "000111111000"
+  zones:
+    sico: provavel
+lacerta-schreiberi:
+  sci: "Lacerta schreiberi"
+  group: repteis
+  ill: i-lizard
+  ill_style: "--lzb:#5E8C3E;--lzh:var(--sky);--ocop:0"
+  endemic: true
+  months: "000111000000"
+  zones:
+    sico: confirmada
+vipera-latastei:
+  sci: "Vipera latastei"
+  group: repteis
+  ill: i-viper
+  venomous: true
+  months: "000111000000"
+  zones:
+    sico: provavel
+lampetra-planeri:
+  sci: "Lampetra planeri"
+  group: peixes
+  ill: i-lamprey
+  months: "011110000000"
+  zones:
+    sico: confirmada
+pseudochondrostoma-polylepis:
+  sci: "Pseudochondrostoma polylepis"
+  group: peixes
+  ill: i-fish
+  endemic: true
+  months: "000001111000"
+  zones:
+    sico: confirmada
+luciobarbus-bocagei:
+  sci: "Luciobarbus bocagei"
+  group: peixes
+  ill: i-fish
+  endemic: true
+  months: "000001111000"
+  zones:
+    sico: confirmada
+iberoporus-pluto:
+  sci: "Iberoporus pluto"
+  group: invertebrados
+  ill: i-beetle
+  endemic: true
+  months: "000000000000"
+  zones:
+    sico: confirmada
+euphydryas-aurinia:
+  sci: "Euphydryas aurinia"
+  group: invertebrados
+  ill: i-bfly
+  months: "000110000000"
+  zones:
+    sico: provavel
+quercus-faginea:
+  sci: "Quercus faginea subsp. broteroi"
+  group: plantas
+  ill: i-oak
+  months: "001110000110"
+  zones:
+    sico: confirmada
+ophrys:
+  sci: "Ophrys spp."
+  group: plantas
+  ill: i-orchid
+  months: "001110000000"
+  zones:
+    sico: provavel

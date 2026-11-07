@@ -1,0 +1,41 @@
+# Dados de cada zona que não dependem da língua.
+# A chave (ex.: "sico") é o nome dos ficheiros da zona em _zonas/pt/ e _zonas/en/.
+# "center" é só o ponto do marcador no mapa geral (aproximado), [latitude, longitude].
+
+sico:
+  center: [40.0, -8.47]
+  ill: i-owl
+  sources:
+    - url: https://www.ccdr-lvt.pt/wp-content/uploads/2022/03/EER_sitio-sico_alvaiazere.pdf
+      pt: CCDR-LVT, ficha do sítio Sicó/Alvaiázere
+      en: CCDR-LVT, Sicó/Alvaiázere site sheet
+    - url: https://www.icnf.pt/api/file/doc/8a4fe445b0253677
+      pt: ICNF, Reserva Natural do Paul de Arzila
+      en: ICNF, Paul de Arzila Nature Reserve
+    - url: https://www.esac.pt/wp-content/uploads/2024/06/PropostaPlanoCogestao_2024_2026_edital.pdf
+      pt: Plano de Cogestão do Paul de Arzila 2024–2026
+      en: Paul de Arzila co-management plan 2024–2026
+    - url: https://oalvaiazerense.com.pt/noticias/quase-metade-do-concelho-de-alvaiazere-com-regras-ambientais-mais-apertadas/
+      pt: O Alvaiazerense, regras do plano de gestão de 2026
+      en: O Alvaiazerense, rules of the 2026 management plan
+    - url: https://core.ac.uk/download/491365279.pdf
+      pt: Reboleira e Eusébio (2021), fauna cavernícola de Sicó
+      en: Reboleira & Eusébio (2021), cave fauna of Sicó
+    - url: https://www.avesdeportugal.info/sitsico/
+      pt: Aves de Portugal, Serra de Sicó
+      en: Aves de Portugal, Serra de Sicó
+    - url: https://www.avesdeportugal.info/sitarzila/
+      pt: Aves de Portugal, Paul de Arzila
+      en: Aves de Portugal, Paul de Arzila
+    - url: https://www.listavermelhadasaves.pt/lista-vermelha/
+      pt: Lista Vermelha das Aves de Portugal 2022
+      en: Red List of the Birds of Portugal 2022
+    - url: https://www.portugalnummapa.com/rota-dos-poios/
+      pt: Rota dos Poios
+      en: Poios trail
+    - url: https://cm-condeixa.pt/turismo/natureza/
+      pt: Câmara Municipal de Condeixa-a-Nova, natureza
+      en: Condeixa-a-Nova municipality, nature
+    - url: https://siaia.apambiente.pt/AIADOC/PA286/fr_rm_quirop_201703_pa_pealvaiazere2019510132738.pdf
+      pt: APA, monitorização de morcegos em Alvaiázere
+      en: APA, bat monitoring in Alvaiázere

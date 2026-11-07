@@ -1,0 +1,49 @@
+# Configuração do Jekyll (GitHub Pages compila este site automaticamente).
+#
+# O projeto "Fauna e Flora" vive todo dentro de /faunaeflora/. As pastas especiais
+# do Jekyll (_layouts, _includes, _data e as coleções) foram apontadas para lá,
+# para não misturar com o resto do site. Os ficheiros HTML que já existiam na raiz
+# (sem front matter) continuam a ser servidos tal como estão.
+
+title: miguelacm.github.io
+baseurl: ""
+markdown: kramdown
+
+collections_dir: faunaeflora
+layouts_dir: faunaeflora/_layouts
+includes_dir: faunaeflora/_includes
+data_dir: faunaeflora/_data
+
+collections:
+  zonas:
+    output: true
+  especies:
+    output: true
+  guias:
+    output: true
+
+# Língua, modelo e endereço de cada ficheiro são deduzidos da pasta onde está.
+# Ex.: faunaeflora/_especies/pt/bubo-bubo.md  ->  /faunaeflora/pt/especies/bubo-bubo/
+defaults:
+  - scope: { path: "faunaeflora/_zonas/pt" }
+    values: { lang: pt, layout: zona, permalink: "/faunaeflora/pt/zonas/:name/" }
+  - scope: { path: "faunaeflora/_zonas/en" }
+    values: { lang: en, layout: zona, permalink: "/faunaeflora/en/zones/:name/" }
+  - scope: { path: "faunaeflora/_especies/pt" }
+    values: { lang: pt, layout: especie, permalink: "/faunaeflora/pt/especies/:name/" }
+  - scope: { path: "faunaeflora/_especies/en" }
+    values: { lang: en, layout: especie, permalink: "/faunaeflora/en/species/:name/" }
+  - scope: { path: "faunaeflora/_guias/pt" }
+    values: { lang: pt, layout: guia, permalink: "/faunaeflora/pt/guias/:name/" }
+  - scope: { path: "faunaeflora/_guias/en" }
+    values: { lang: en, layout: guia, permalink: "/faunaeflora/en/guides/:name/" }
+  - scope: { path: "faunaeflora/pt" }
+    values: { lang: pt, layout: base }
+  - scope: { path: "faunaeflora/en" }
+    values: { lang: en, layout: base }
+
+exclude:
+  - faunaeflora/README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor

@@ -1,0 +1,34 @@
+# Grupos de espécies, pela ordem em que aparecem nas listas.
+# "ill" é a ilustração genérica usada quando a espécie não tem uma própria.
+- id: aves
+  ill: i-bird
+  pt: Aves
+  en: Birds
+- id: morcegos
+  ill: i-bat
+  pt: Morcegos
+  en: Bats
+- id: mamiferos
+  ill: i-boar
+  pt: Mamíferos
+  en: Mammals
+- id: anfibios
+  ill: i-newt
+  pt: Anfíbios
+  en: Amphibians
+- id: repteis
+  ill: i-lizard
+  pt: Répteis
+  en: Reptiles
+- id: peixes
+  ill: i-fish
+  pt: Peixes
+  en: Fish
+- id: invertebrados
+  ill: i-bfly
+  pt: Invertebrados
+  en: Invertebrates
+- id: plantas
+  ill: i-oak
+  pt: Plantas
+  en: Plants
